@@ -5,7 +5,7 @@ structure Cmap = BinaryMapFn(struct
 			end)
 
 
-fun parse file =
+fun savethecat file =
 	let
 		(* A function to read an integer from specified input. *)
 		(* Open input file. *)
@@ -49,31 +49,31 @@ fun parse file =
 	fun update_c(arr,time_array,cats,water,i:int,j:int,c:char,t:int,n:int,m:int) =
 	let
 		val	x = Cmap.find(arr,(i,j))
-		val	y = 0
+		val	y = Cmap.find(time_array, (i,j))
 	in
 	case c of #"R" =>
-	if j<=n andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array,(i,j),t+1),pf(cats,i,j,t),water,i,j-2,#"L",t,n,m)
-	else if j<=n andalso is_cat(valOf(x)) andalso y = t+1 then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array,(i,j),t+1),cats,water,i,j-2,#"L",t,n,m)
+	if j<=m andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array,(i,j),t+1),pf(cats,i,j,t),water,i,j-2,#"L",t,n,m)
+	else if j<=m andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array,(i,j),t+1),cats,water,i,j-2,#"L",t,n,m)
 	else update_c(arr,time_array,cats,water,i,j-2,#"L",t,n,m)
 	| #"L" =>
 	if j>=0 andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t+1),pf(cats,i,j,t),water,i+1,j+1,#"U",t,n,m)
-	else if j>=0 andalso is_cat(valOf(x)) andalso y = t+1 then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j), t+1),cats,water,i+1,j+1,#"U",t,n,m)
+	else if j>=0 andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j), t+1),cats,water,i+1,j+1,#"U",t,n,m)
 	else update_c(arr,time_array,cats,water,i+1,j+1,#"U",t,n,m)
 	| #"U" =>
-	if i>=0 andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array,(i,j),t+1),pf(cats,i,j,t),water,i-1,j,#"D",t,n,m)
-	else if i>=0 andalso is_cat(valOf(x)) andalso y = t+1 then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array,(i,j),t+1),cats,water,i-1,j,#"D",t,n,m)
-	else update_c(arr,time_array,cats,water,i-1,j,#"D",t,n,m)
+	if i>=0 andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array,(i,j),t+1),pf(cats,i,j,t),water,i-2,j,#"D",t,n,m)
+	else if i>=0 andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array,(i,j),t+1),cats,water,i-2,j,#"D",t,n,m)
+	else update_c(arr,time_array,cats,water,i-2,j,#"D",t,n,m)
 	| #"D" =>
-	if i<=m andalso valOf(x) = #"." then update_cat(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array,(i,j),t+1),pf(cats,i,j,t),water,t,n,m)
-	else if i<=m andalso is_cat(valOf(x)) andalso y = t+1 then update_cat(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array,(i,j),t+1),cats,water,t,n,m)
+	if i<=n andalso valOf(x) = #"." then update_cat(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array,(i,j),t+1),pf(cats,i,j,t),water,t,n,m)
+	else if i<=m andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_cat(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array,(i,j),t+1),cats,water,t,n,m)
 	else update_cat(arr,time_array,cats,water,t,n,m)
 	end
 
 	and update_cat (arr,time_array,cats,water,t:int,n:int,m:int) =
 	let
-		val (i,j,s) = Queue.dequeue(cats)
+		val (i,j,time) = Queue.dequeue(cats)
 	in
-		case s-t of 1 => update_water(arr,time_array,pf(cats,i,j,s),water,t,n,m)
+		case time-t of 1 => update_water(arr,time_array,pf(cats,i,j,time),water,t,n,m)
 		| _ => update_c(arr,time_array,cats,water,i,j+1,#"R",t,n,m)
 	end
 
@@ -83,37 +83,45 @@ fun parse file =
 		val y = Cmap.find(time_array,(i,j))
 	in
 	case c of #"R" =>
-	if j<=n andalso valOf(x) = #"." then update_w(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t+1),cats,pf(cats,i,j,t),i,j-2,#"L",t,n,m)
-	else if j<=n andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_w(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,i,j-2,#"L",t,n,m)
+	if j<=m andalso valOf(x) = #"." then update_w(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t+1),cats,pf(cats,i,j,t),i,j-2,#"L",t,n,m)
+	else if j<=n andalso is_cat(valOf(x)) = t+1 then update_w(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,i,j-2,#"L",t,n,m)
 	else update_w(arr,time_array,cats,water,i,j-2,#"L",t,n,m)
 	| #"L" =>
 	if j>=0 andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t+1),cats,pf(cats,i,j,t),i+1,j+1,#"U",t,n,m)
-	else if j>=0 andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_c(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,i+1,j+1,#"U",t,n,m)
+	else if j>=0 andalso is_cat(valOf(x)) then update_c(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,i+1,j+1,#"U",t,n,m)
 	else update_w(arr,time_array,cats,water,i+1,j+1,#"U",t,n,m)
 	| #"U" =>
 	if i>=0 andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t+1),cats,pf(cats,i,j,t),i-2,j,#"D",t,n,m)
-	else if i>=0 andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_c(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,i-2,j,#"D",t,n,m)
+	else if i>=0 andalso is_cat(valOf(x)) then update_c(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,i-2,j,#"D",t,n,m)
 	else update_w(arr,time_array,cats,water,i-2,j,#"D",t,n,m)
 	| #"D" =>
-	if i<=m andalso valOf(x) = #"." then update_cat(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t+1),cats,pf(cats,i,j,t),t,n,m)
-	else if i<=m andalso is_cat(valOf(x)) andalso valOf(y) = t+1 then update_cat(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,t,n,m)
+	if i<=n andalso valOf(x) = #"." then update_cat(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t+1),cats,pf(cats,i,j,t),t,n,m)
+	else if i<=m andalso is_cat(valOf(x)) then update_cat(Cmap.insert(arr,(i,j),kill(valOf(x))),Cmap.insert(time_array, (i,j),t+1),cats,water,t,n,m)
 	else update_water(arr,time_array,cats,water,t,n,m)
 	end
 
 	and update_water(arr,time_array,cats,water,t:int,n:int,m:int) =
 	let
-		val (i,j,s) = Queue.dequeue(cats)
+		val (i,j,time) = Queue.dequeue(cats)
 	in
-		case s-t of 1 => answer(arr,time_array,pf(cats,i,j,s),water,n,m,t)
+		case time-t of 1 => answer(arr,time_array,pf(cats,i,j,time),water,n,m,t)
 		| _ => update_w(arr,time_array,cats,water,i,j+1,#"R",t,n,m)
 	end
-
+	and are_there_cats (*...*)
+	and find_time (*...*)
+	and ananeothikan_nera (*...*)
 	and answer (arr,time_array,cats,water,n:int,m:int,t:int) =
-	if t <> 1
-		then
+	if (*cat queue is empty*)
+		if (*there are no more cats*)
+			then (*print xrono, kiniseis *)
+		else if (*den ananeothikan ta nera*)
+			then (*print xrono, kiniseis *)
+
+	(*if t<>1
 			case (Queue.isEmpty(cats),Queue.isEmpty(water)) of (true,true) => print("infinity")
 			| _ => answer(update_cat(arr,time_array,cats,water,n,m-1,t))
 	else (Cmap.find(arr,(1,1)))
+	*)
 	in
 		answer(readGrid(TextIO.input1 inStream,Cmap.empty,Cmap.empty,Queue.mkQueue(),Queue.mkQueue(),0,0,0,0))
 end
@@ -124,6 +132,10 @@ end
 
 
 
+(* an oura gates einai mideniki
+	an oi gates einai miden sto tablo	}	kalese tin synartisi exoume teleiwsei peta xrono-3, print string twn thesewn
+	or den exoun ananeothei ta nera		}	
+   
 
 
 
