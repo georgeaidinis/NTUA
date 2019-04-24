@@ -134,6 +134,7 @@ fun savethecat file =
 		let
 			val x = update_cat(arr, time_array, cats, water, t, n, m)
 		in
+			(*...*)
 			if Queue.isEmpty(cats)
 				if are_there_cats (arr, n, m, i, j, 0)=0 then
 					(*print xrono, kiniseis *)
