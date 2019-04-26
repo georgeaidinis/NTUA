@@ -122,7 +122,7 @@ fun savethecat file =
                             else update_w(arr,time_array,cats,water,i+1,j+1,#"D",t,n,m,cats_num,cats_prev,water_num,water_prev)
                         | #"D" =>
                             if x = #"." then update_w(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t),cats,pf(water,i,j,t+1),i-2,j,#"U",t,n,m,cats_num,cats_prev,water_num+1,water_prev)
-                            else if is_cat(x) then update_c(Cmap.insert(arr,(i,j),kill(x)),Cmap.insert(time_array, (i,j),t),cats,pf(water,i,j,t+1),i-2,j,#"U",t,n,m,cats_num-1,cats_prev,water_num+1,water_prev)
+                            else if is_cat(x) then update_w(Cmap.insert(arr,(i,j),kill(x)),Cmap.insert(time_array, (i,j),t),cats,pf(water,i,j,t+1),i-2,j,#"U",t,n,m,cats_num-1,cats_prev,water_num+1,water_prev)
                             else update_w(arr,time_array,cats,water,i-2,j,#"U",t,n,m,cats_num,cats_prev,water_num,water_prev)
                         | #"U" =>
                             if x = #"." then update_water(Cmap.insert(arr,(i,j),#"W"),Cmap.insert(time_array, (i,j),t),cats,pf(water,i,j,t+1),t,n,m,cats_num,cats_prev,water_num+1,water_prev)
@@ -157,9 +157,9 @@ fun savethecat file =
         fun ananeothikan_nera (*...*)
         *)
         and help (arr,i,j,n,m) =
-            if i<=n-1 andalso j<m-1 then (Int.toString(valOf(Cmap.find(arr,(i,j)))) ^ " " ^ help(arr,i,j+1,n,m))
-            else if i<n-1 andalso j=m-1 then (Int.toString(valOf(Cmap.find(arr,(i,j)))) ^ " \n" ^ help(arr,i+1,0,n,m))
-            else Int.toString(valOf(Cmap.find(arr,(i,j)))) ^ " \n"
+            if i<=n-1 andalso j<m-1 then (Char.toString(valOf(Cmap.find(arr,(i,j)))) ^ help(arr,i,j+1,n,m))
+            else if i<n-1 andalso j=m-1 then (Char.toString(valOf(Cmap.find(arr,(i,j)))) ^ "\n" ^ help(arr,i+1,0,n,m))
+            else Char.toString(valOf(Cmap.find(arr,(i,j)))) ^ "\n"
 
         and str_answer(arr,i,j,str) =
             let
@@ -231,7 +231,7 @@ fun savethecat file =
 
         and answer (arr,time_array,cats,water,t,n,m,cats_num,cats_prev,water_num,water_prev) =
             (*...*)
-            if cats_num = cats_prev andalso Queue.isEmpty(cats) andalso water_prev = water_num then print("infinity"^ "\n"^answer_Inf(arr,n,m)^"\n")
+            if cats_num = cats_prev andalso Queue.isEmpty(cats) andalso water_prev = water_num then print("infinity"^ "\n"^answer_Inf(arr,n,m)^"\n"^help (arr,0,0,n,m))
             else if Queue.isEmpty(cats) andalso cats_num = 0 then
                     print (Int.toString(t-1)^"\n"^answer_Ninf(arr,time_array,n,m,t)^"\n")
             (*print xrono, kiniseis *)
