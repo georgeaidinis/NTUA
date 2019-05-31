@@ -197,7 +197,7 @@ def insert_Staff(Name,Pay,Surname ,LibraryName):
 
  
 def main():
-	"""insert_library('NTUA')
+	insert_library('NTUA')
 	file_name = "publishers.csv"
 	for x in read_the_file(file_name):
 		insert_Publisher(x[0],x[1],x[2])
@@ -207,7 +207,7 @@ def main():
 	file_name = "users.csv"
 	for x in read_the_file(file_name):
 		insert_Member(x[0],x[1],x[2],x[3],x[4],x[5],x[6])
-	insert_Author(1,"Edgar Allan", "Poe", "1809-01-19")
+	insert_Author("Edgar Allan", "Poe", "1809-01-19")
 	insert_Staff("Theodor", 42,"Tsilivis", "NTUA")
 	insert_Staff("George", 4200,"Aidinis", "NTUA")
 	insert_Staff("Pheivws", 420,"Kalogiannis", "NTUA")
@@ -216,8 +216,8 @@ def main():
 	insert_Staff("Ivanka", 5,"Trump", "NTUA")
 	insert_Staff("Donald Jr", 6,"Trump", "NTUA")
 	insert_Staff("Tiffany", 7,"Trump", "NTUA")
-	insert_Staff("Eric", 8,"Trump", "NTUA")"""
-	
+	insert_Staff("Eric", 8,"Trump", "NTUA")
+
 
 
  
