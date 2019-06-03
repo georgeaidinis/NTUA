@@ -1,26 +1,26 @@
 memberID,Mfirst,Mlast,Address,No_of_Books_borrowed,birthdate,Can_borrow
-1,Dwight,Schrute,"Βασίλη Μήτρου,82",2,1994-12-01,NO
-2,Jim,Halpert,"Ιπποκράτους,2",0,1992-05-23,NO
-3,Pam,Beesly,"Μπεναρόγια,26",0,1997-06-04,NO
-4,Stanley,Hudson,"Ίλιντεν,56",4,1992-02-02,YES
-5,Kevin,Malone,"Λούξεμπουργκ,10",5,1994-11-12,NO
-6,Angela,Martin,"Σαρτρ,40",2,1996-09-29,YES
-7,Phyllis,Vance,"Ιπποκράτους,72",0,1994-03-08,YES
-8,Meredith,Palmer,"Λούξεμπουργκ,70",0,1993-02-25,YES
-9,Creed,Bratton,"Λούξεμπουργκ,45",0,1991-01-23,YES
-10,Oscar,Martinez,"Βασίλη Μήτρου,70",2,1993-12-19,YES
-11,Ryan,Howard,"Μπεν Γκουριόν,8",1,1995-08-20,YES
-12,Kelly,Kapoor,"Σαρτρ,11",1,1992-04-08,YES
-13,Andy,Bernard,"Ιπποκράτους,47",3,1999-05-25,YES
-14,Toby,Flenderson,"Λούξεμπουργκ,49",1,1993-08-23,YES
-15,Michael,Scott,"Αλμπέρ Καμύ,91",1,1993-07-15,YES
-16,Darryl,Philbin,"Ίλιντεν,57",1,1996-01-04,YES
-17,Erin,Hannon,"Ιπποκράτους,23",1,1992-06-17,YES
-18,Gabe,Lewis,"Ίλιντεν,67",5,1998-08-13,NO
-19,Jan,Levinson,"Λούξεμπουργκ,69",3,1995-11-11,YES
-20,David,Wallace,"Βασίλη Μήτρου,47",2,1998-12-12,NO
-21,Nellie,Bertram,"Ίλιντεν,33",1,1997-01-01,NO
-22,Roy,Anderson,"Βασίλη Μήτρου,68",2,1998-02-02,NO
-23,Karen,Filippelli,"Μπελογιάννη,52",0,1997-03-03,NO
-24,Robert,California,"Σαρτρ,57",0,1994-04-04,YES
-25,Bob,Vance,"Σαρτρ,75",0,1990-05-05,YES
+1,Dwight,Schrute,"Βασίλη Μήτρου,82",0,1994-12-01,TRUE
+2,Jim,Halpert,"Ιπποκράτους,2",0,1992-05-23,TRUE
+3,Pam,Beesly,"Μπεναρόγια,26",0,1997-06-04,TRUE
+4,Stanley,Hudson,"Ίλιντεν,56",0,1992-02-02,TRUE
+5,Kevin,Malone,"Λούξεμπουργκ,10",0,1994-11-12,TRUE
+6,Angela,Martin,"Σαρτρ,40",0,1996-09-29,TRUE
+7,Phyllis,Vance,"Ιπποκράτους,72",0,1994-03-08,TRUE
+8,Meredith,Palmer,"Λούξεμπουργκ,70",0,1993-02-25,TRUE
+9,Creed,Bratton,"Λούξεμπουργκ,45",0,1991-01-23,TRUE
+10,Oscar,Martinez,"Βασίλη Μήτρου,70",0,1993-12-19,TRUE
+11,Ryan,Howard,"Μπεν Γκουριόν,8",0,1995-08-20,TRUE
+12,Kelly,Kapoor,"Σαρτρ,11",0,1992-04-08,TRUE
+13,Andy,Bernard,"Ιπποκράτους,47",0,1999-05-25,TRUE
+14,Toby,Flenderson,"Λούξεμπουργκ,49",0,1993-08-23,TRUE
+15,Michael,Scott,"Αλμπέρ Καμύ,91",0,1993-07-15,TRUE
+16,Darryl,Philbin,"Ίλιντεν,57",0,1996-01-04,TRUE
+17,Erin,Hannon,"Ιπποκράτους,23",0,1992-06-17,TRUE
+18,Gabe,Lewis,"Ίλιντεν,67",0,1998-08-13,TRUE
+19,Jan,Levinson,"Λούξεμπουργκ,69",0,1995-11-11,TRUE
+20,David,Wallace,"Βασίλη Μήτρου,47",0,1998-12-12,TRUE
+21,Nellie,Bertram,"Ίλιντεν,33",0,1997-01-01,TRUE
+22,Roy,Anderson,"Βασίλη Μήτρου,68",0,1998-02-02,TRUE
+23,Karen,Filippelli,"Μπελογιάννη,52",0,1997-03-03,TRUE
+24,Robert,California,"Σαρτρ,57",0,1994-04-04,TRUE
+25,Bob,Vance,"Σαρτρ,75",0,1990-05-05,TRUE

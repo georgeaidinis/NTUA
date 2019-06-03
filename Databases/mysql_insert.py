@@ -3,7 +3,7 @@
 from mysql.connector import MySQLConnection, Error
 from mysql_dbconfig import read_db_config
 from csv_reader import 	read_the_file
-
+from split import div_first_last
 """
 Inserts a row into the Books relation of the DB by creating
 a query in sql format.Creates Connection, finds configuration.
@@ -12,8 +12,9 @@ Title (Varchar 45), Pages(Int), Publication Year (Date),
 Publishers_Name(Varchar45, Not Null) and Library Name(Varchar 45).
 """
 def insert_book(ISBN, Title, Pages, Publication_Year, Publishers_Name, Library_Name, Author):
-	query = "INSERT INTO Books VALUES (%s,%s,%s,%s,%s,%s)"
-	args = (ISBN, Title, Pages, Publication_Year, Publishers_Name, Library_Name)
+	query = "INSERT INTO Books VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+	AuthorName, AuthorSur = div_first_last(Author)
+	args = (ISBN, Title, Pages, Publication_Year, Publishers_Name, Library_Name, AuthorName, AuthorSur)
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
@@ -108,9 +109,9 @@ Surname(Varchar 45), Number of Books(INT), Can_Borrow?(TINYINT),
 and LibraryName(Varchar 45).
 """
 
-def insert_Member(MemberID,Name,Surname,Address,Number_of_Books,Birthdate,Can_Borrow):
+def insert_Member(MemberID,Name,Surname,Address,num_books_borrowed,Birthdate,Can_Borrow, Library='NTUA'):
 	query = "INSERT INTO Members VALUES( %s , %s , %s , %s , %s , %s , %s , %s )"
-	args = (MemberID, Birthdate, Address, Name, Surname, Number_of_Books, Can_Borrow, 'NTUA')
+	args = (MemberID, Birthdate, Address, Name, Surname, num_books_borrowed, 1, Library)
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
@@ -138,9 +139,9 @@ The new row contains the attributes AuthorID (INT, automated KEY),
 Name(Varchar 45), Surname(Varchar 45), Birthdate(DATE)
 """
 
-def insert_Author(Name, Surname, Birthdate):
-	query = "INSERT INTO Authors(Name, Surname, Birthdate) VALUES(  %s , %s , %s )"
-	args = (Name, Surname, Birthdate)
+def insert_Author(AuthorID, Name, Surname, Birthdate):
+	query = "INSERT INTO Authors(AuthorID, Name, Surname, Birthdate) VALUES( %s, %s , %s , %s )"
+	args = (AuthorID, Name, Surname, Birthdate)
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
@@ -195,7 +196,30 @@ def insert_Staff(Name,Pay,Surname ,LibraryName):
 		conn.close()
 
 
+def insert_copy(Number, Books_ISBN, Position):
+	query = "INSERT INTO Copy VALUES (%s,%s,%s)"
+	args = (Books_ISBN, Number, Position)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query, args)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last insert id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
  
+
 def main():
 	insert_library('NTUA')
 	file_name = "publishers.csv"
@@ -206,19 +230,11 @@ def main():
 		insert_book(x[0],x[1],x[2],x[3],x[4],x[5],x[6])
 	file_name = "users.csv"
 	for x in read_the_file(file_name):
-		insert_Member(x[0],x[1],x[2],x[3],x[4],x[5],x[6])
-	insert_Author("Edgar Allan", "Poe", "1809-01-19")
-	insert_Staff("Theodor", 42,"Tsilivis", "NTUA")
-	insert_Staff("George", 4200,"Aidinis", "NTUA")
-	insert_Staff("Pheivws", 420,"Kalogiannis", "NTUA")
-	insert_Staff("Donald John", 3,"Trump", "NTUA")
-	insert_Staff("Melania", 4,"Trump", "NTUA")
-	insert_Staff("Ivanka", 5,"Trump", "NTUA")
-	insert_Staff("Donald Jr", 6,"Trump", "NTUA")
-	insert_Staff("Tiffany", 7,"Trump", "NTUA")
-	insert_Staff("Eric", 8,"Trump", "NTUA")
-
-
+		insert_Member(*x)
+	for x in read_the_file('authors.csv'):
+		insert_Author(*x)
+	for x in read_the_file('copies.csv'):
+		insert_copy(*x)
 
  
 if __name__ == '__main__':

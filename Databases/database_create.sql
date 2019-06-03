@@ -40,11 +40,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`Books` (
   `ISBN` VARCHAR(18) NOT NULL,
-  `Title` VARCHAR(80) NULL,
+  `Title` VARCHAR(160) NULL,
   `Pages` INT NULL,
   `Publication_Year` INT NULL,
   `Publishers_Name` VARCHAR(60) NOT NULL,
   `LibraryName` VARCHAR(10) NOT NULL,
+  `AuthorName` VARCHAR(80) NOT NULL,
+  `AuthorSur` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`ISBN`),
   INDEX `fk_Books_Publishers1_idx` (`Publishers_Name` ASC),
   CONSTRAINT `fk_Books_Publishers1`
@@ -67,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `database`.`Authors` (
   `AuthorID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(60) NULL,
   `Surname` VARCHAR(60) NULL,
-  `Birthdate` DATE NULL,
+  `Birthdate` INT NULL,
   PRIMARY KEY (`AuthorID`))
 ENGINE = InnoDB;
 
@@ -81,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `database`.`Members` (
   `Address` VARCHAR(60) NULL,
   `Name` VARCHAR(60) NULL,
   `Surname` VARCHAR(60) NULL,
-  `Number of Books` INT NULL,
-  `Can Borrow?` ENUM ('YES', 'NO') NOT NULL,
+  `num_books_borrowed` INT NULL,
+  `Can_Borrow`  BOOLEAN NOT NULL,
   `LibraryName` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`MemberID`),
   CONSTRAINT `fk_Members_Library1`
@@ -131,11 +133,10 @@ ENGINE = InnoDB;
 -- Table `database`.`Copy`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`Copy` (
-  `Number` INT NOT NULL,
   `Books_ISBN` VARCHAR(18) NOT NULL,
+  `Number` INT NOT NULL,
   `Position` VARCHAR(10) NULL,
-  PRIMARY KEY (`Number`, `Books_ISBN`),
-  INDEX `fk_Copy_Books1_idx` (`Books_ISBN` ASC),
+  PRIMARY KEY (`Books_ISBN`, `Number` ),
   CONSTRAINT `fk_Copy_Books1`
     FOREIGN KEY (`Books_ISBN`)
     REFERENCES `database`.`Books` (`ISBN`)
@@ -183,11 +184,11 @@ CREATE TABLE IF NOT EXISTS `database`.`Borrows` (
   `Members_MemberID` INT NOT NULL,
   `Copy_Number` INT NOT NULL,
   `Copy_Books_ISBN` VARCHAR(18) NOT NULL,
-  `Start Date` DATE NULL,
-  `Return date` DATE NULL,
-  `Due Date` DATE NULL,
-  PRIMARY KEY (`Members_MemberID`, `Copy_Number`, `Copy_Books_ISBN`),
-  INDEX `fk_Members_has_Copy_Copy1_idx` (`Copy_Number` ASC, `Copy_Books_ISBN` ASC),
+  `Start_Date` DATE NULL,
+  `Return_date` DATE NULL,
+  `Due_Date` DATE NULL,
+  PRIMARY KEY (`Members_MemberID`, `Copy_Books_ISBN`, `Copy_Number`),
+  INDEX `fk_Members_has_Copy_Copy1_idx` (`Copy_Books_ISBN` ASC, `Copy_Number` ASC ),
   INDEX `fk_Members_has_Copy_Members1_idx` (`Members_MemberID` ASC),
   CONSTRAINT `fk_Members_has_Copy_Members1`
     FOREIGN KEY (`Members_MemberID`)
@@ -195,8 +196,8 @@ CREATE TABLE IF NOT EXISTS `database`.`Borrows` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Members_has_Copy_Copy1`
-    FOREIGN KEY (`Copy_Number` , `Copy_Books_ISBN`)
-    REFERENCES `database`.`Copy` (`Number` , `Books_ISBN`)
+    FOREIGN KEY ( `Copy_Books_ISBN`,`Copy_Number`)
+    REFERENCES `database`.`Copy` ( `Books_ISBN`, `Number` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -268,6 +269,30 @@ CREATE TABLE IF NOT EXISTS `database`.`Reminds` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+-- -- -----------------------------------------------------
+-- -- Table `database`.`Books`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `database`.`Books` (
+--   `ISBN` VARCHAR(18) NOT NULL,
+--   `Title` VARCHAR(80) NULL,
+--   `Pages` INT NULL,
+--   `Publication_Year` INT NULL,
+--   `Publishers_Name` VARCHAR(60) NOT NULL,
+--   `LibraryName` VARCHAR(10) NOT NULL,
+--   `Author` VARCHAR(80) NOT NULL,
+--   PRIMARY KEY (`ISBN`),
+--   INDEX `fk_Books_Publishers1_idx` (`Publishers_Name` ASC),
+--   CONSTRAINT `fk_Books_Publishers1`
+--     FOREIGN KEY (`Publishers_Name`)
+--     REFERENCES `database`.`Publishers` (`Name`)
+--     ON DELETE CASCADE
+--     ON UPDATE CASCADE,
+--   CONSTRAINT `fk_Books_Library1`
+--     FOREIGN KEY (`LibraryName`)
+--     REFERENCES `database`.`Library` (`LibraryName`)
+--     ON DELETE CASCADE
+--     ON UPDATE CASCADE)
+-- ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
