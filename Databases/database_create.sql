@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `database`.`Borrows` (
   PRIMARY KEY (`Members_MemberID`, `Copy_Books_ISBN`, `Copy_Number`),
   INDEX `fk_Members_has_Copy_Copy1_idx` (`Copy_Books_ISBN` ASC, `Copy_Number` ASC ),
   INDEX `fk_Members_has_Copy_Members1_idx` (`Members_MemberID` ASC),
-  CONSTRAINT `fk_Members_has_Copy_Members1`
+  CONSTRAINT `fk_Membexrs_has_Copy_Members1`
     FOREIGN KEY (`Members_MemberID`)
     REFERENCES `database`.`Members` (`MemberID`)
     ON DELETE CASCADE

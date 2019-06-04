@@ -109,9 +109,9 @@ Surname(Varchar 45), Number of Books(INT), Can_Borrow?(TINYINT),
 and LibraryName(Varchar 45).
 """
 
-def insert_Member(MemberID,Name,Surname,Address,num_books_borrowed,Birthdate,Can_Borrow, Library='NTUA'):
-	query = "INSERT INTO Members VALUES( %s , %s , %s , %s , %s , %s , %s , %s )"
-	args = (MemberID, Birthdate, Address, Name, Surname, num_books_borrowed, 1, Library)
+def insert_Member(Name,Surname,Address,num_books_borrowed,Birthdate,Can_Borrow, Library='NTUA'):
+	query = "INSERT INTO Members(Birthdate, Address, Name, Surname, num_books_borrowed, Can_Borrow, LibraryName) VALUES(%s , %s , %s , %s , %s , %s , %s )"
+	args = (Birthdate, Address, Name, Surname, num_books_borrowed, 1, Library)
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
@@ -139,9 +139,9 @@ The new row contains the attributes AuthorID (INT, automated KEY),
 Name(Varchar 45), Surname(Varchar 45), Birthdate(DATE)
 """
 
-def insert_Author(AuthorID, Name, Surname, Birthdate):
-	query = "INSERT INTO Authors(AuthorID, Name, Surname, Birthdate) VALUES( %s, %s , %s , %s )"
-	args = (AuthorID, Name, Surname, Birthdate)
+def insert_Author(Name, Surname, Birthdate):
+	query = "INSERT INTO Authors(Name, Surname, Birthdate) VALUES(%s , %s , %s )"
+	args = (Name, Surname, Birthdate)
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
@@ -221,7 +221,7 @@ def insert_copy(Number, Books_ISBN, Position):
  
 
 def main():
-	insert_library('NTUA')
+	"""insert_library('NTUA')
 	file_name = "publishers.csv"
 	for x in read_the_file(file_name):
 		insert_Publisher(x[0],x[1],x[2])
@@ -235,7 +235,7 @@ def main():
 		insert_Author(*x)
 	for x in read_the_file('copies.csv'):
 		insert_copy(*x)
-
+	insert_Member("George","Aidinis","Pindou",0,"1998-06-04",1,"NTUA")"""
  
 if __name__ == '__main__':
     main()
