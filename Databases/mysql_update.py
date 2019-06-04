@@ -7,10 +7,16 @@ from split import div_first_last
 
 def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publisher = '', LibraryName = '', Author='',ISBN_KEY = '',  condition = ''):
 	coma_counter = [0]*8
-	AuthorName, AuthorSurname = div_first_last(Author)
+	if Author != '':
+		AuthorName, AuthorSurname = div_first_last(Author)
+	else:
+		AuthorName, AuthorSurname = '' , ''
 	attribute_list = ["ISBN = '", "Title = '", "Pages = ", "Publication_Year = ", "Publishers_Name = '", "LibraryName = '", "AuthorName = '", "AuthorSurname = '"]
 	i = 0
-	
+	if Pages == '0':
+		Pages = 0
+	if Publication_Year == '0':
+		Publication_Year = 0
 	if ISBN != '':
 		coma_counter[0] +=1
 	if Title != '':
@@ -108,7 +114,7 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publis
 		List += "'"
 		j = j-1
 
-	if ISBN_KEY!= '' and  condition!='':
+	if ISBN_KEY!= '' or  condition!='':
 		List += "Where "
 		if ISBN_KEY != '':
 			List += " ISBN = '"
@@ -222,7 +228,7 @@ def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', Author
 		List += bi
 		List += "'"
 
-	if AuthorID_KEY!= 0 and  condition!='':
+	if AuthorID_KEY!= 0 or  condition!='':
 		List += "Where "
 		if AuthorID_KEY != 0:
 			List += "AuthorID = '"
@@ -359,7 +365,7 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 		List += LibraryName
 		List += "'"
 	
-	if MemberID!= 0 and  condition!='':
+	if MemberID!= 0 or  condition!='':
 		List += "Where "
 		if MemberID != '':
 			List += "MemberID = '"
@@ -393,12 +399,13 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 
 def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition=''):
 	coma_counter = [0]*3
-	attribute_list = ["Name = '", "Date_of_Est = '", "Address = '"]
+	attribute_list = ["Name = '", "Date_of_Est = ", "Address = '"]
 	i = 0
-	
+	if Date_of_Est == '0':
+		Date_of_Est = 0
 	if Name != '':
 		coma_counter[0] +=1
-	if Date_of_Est != '':
+	if Date_of_Est != 0:
 		coma_counter[1] +=1
 	if Address != '':
 		coma_counter[2] +=1
@@ -418,15 +425,15 @@ def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition
 		List += "'"
 
 	
-	if Date_of_Est != '' and j!=1:
+	if Date_of_Est != 0 and j!=1:
 		List += attribute_list[1]
 		List += Date_of_Est
-		List += "',"
+		List += ","
 		j = j-1
-	elif Date_of_Est != '' and j==1: 
+	elif Date_of_Est != 0 and j==1: 
 		List += attribute_list[1]
 		List += Date_of_Est
-		List += "'"
+		List += ""
 
 
 	if Address != '' and j!=1:
@@ -439,7 +446,7 @@ def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition
 		List += Address
 		List += ""
 
-	if  Name_KEY != '' and  condition!='':
+	if  Name_KEY != '' or  condition!='':
 		List += "Where "
 		if Name_KEY != '':
 			List += Name_KEY
@@ -471,6 +478,6 @@ def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition
 
 
 def main():
-	return
+	#update_books (Title = 'XAXAXAXAXAXAXAX',ISBN_KEY = '101-1312-2133')
 if __name__ == '__main__':
     main()

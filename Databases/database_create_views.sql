@@ -23,4 +23,14 @@ CREATE VIEW Authors_view AS
 -- -----------------------------------------------------
 
 CREATE VIEW Authored_view AS
-	
+	select Authors.Name, Authors.Surname, Books.ISBN, Books.Title
+	from  Authors, Books, Authored
+	where Authored.Authors_AuthorID = Authors.AuthorID and Authored.Books_ISBN = Books.ISBN
+	group by Authors.Surname, Authors.Name;
+
+
+-- -----------------------------------------------------
+-- Authored view. Hides the AuthorID column from the user
+-- and provides Author Name, Surname, and the books he/she
+-- has authored via the ISBN and Title.
+-- -----------------------------------------------------	
