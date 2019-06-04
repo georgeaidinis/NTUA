@@ -2,6 +2,7 @@
 
 from mysql.connector import MySQLConnection, Error
 from mysql_dbconfig import read_db_config
+from split import div_first_last
 
 
 def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publisher = '', LibraryName = '', Author='',ISBN_KEY = '',  condition = ''):
@@ -110,7 +111,9 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publis
 	if ISBN_KEY!= '' and  condition!='':
 		List += "Where "
 		if ISBN_KEY != '':
+			List += " ISBN = '"
 			List += ISBN_KEY
+			List += "'"
 		else:
 			List += condition
 	List += ";"
@@ -222,7 +225,9 @@ def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', Author
 	if AuthorID_KEY!= 0 and  condition!='':
 		List += "Where "
 		if AuthorID_KEY != 0:
+			List += "AuthorID = '"
 			List += AuthorID_KEY
+			List += "'"
 		else:
 			List += condition
 	List += ";"
@@ -249,7 +254,7 @@ def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', Author
 		conn.close()
 
 
-def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-1,Birthdate='',Can_Borrow=-1, LibraryName='NTUA',MemberID_KEY=0, condition=''):
+def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-1,Birthdate='',Can_Borrow=-1, LibraryName='',MemberID_KEY=0, condition=''):
 	coma_counter = [0]*8
 	attribute_list = ["MemberID = ", "Name = '", "Surname = ", "Address = '", "num_books_borrowed = ", "Birthdate = '", "Can_Borrow = ", "LibraryName = '"]
 	i = 0
@@ -357,7 +362,9 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 	if MemberID!= 0 and  condition!='':
 		List += "Where "
 		if MemberID != '':
+			List += "MemberID = '"
 			List += MemberID
+			List += "'"
 		else:
 			List += condition
 	List += ";"
