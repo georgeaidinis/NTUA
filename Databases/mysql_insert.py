@@ -221,7 +221,7 @@ def insert_copy(Number, Books_ISBN, Position):
  
 
 def main():
-	"""insert_library('NTUA')
+	insert_library('NTUA')
 	file_name = "publishers.csv"
 	for x in read_the_file(file_name):
 		insert_Publisher(x[0],x[1],x[2])
@@ -230,12 +230,12 @@ def main():
 		insert_book(x[0],x[1],x[2],x[3],x[4],x[5],x[6])
 	file_name = "users.csv"
 	for x in read_the_file(file_name):
-		insert_Member(*x)
+		insert_Member(x[1],x[2],x[3],x[4],x[5],x[6])
 	for x in read_the_file('authors.csv'):
-		insert_Author(*x)
+		insert_Author(x[1],x[2],x[3])
 	for x in read_the_file('copies.csv'):
 		insert_copy(*x)
-	insert_Member("George","Aidinis","Pindou",0,"1998-06-04",1,"NTUA")"""
+	#insert_Member("George","Aidinis","Pindou",0,"1998-06-04",1,"NTUA")
  
 if __name__ == '__main__':
     main()
