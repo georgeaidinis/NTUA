@@ -397,7 +397,7 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 		conn.close()
 
 
-def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition=''):
+def update_publishers(Name='', Date_of_Establishment='', Address='',Name_KEY='', condition=''):
 	coma_counter = [0]*3
 	attribute_list = ["Name = '", "Date_of_Est = ", "Address = '"]
 	i = 0
@@ -439,17 +439,19 @@ def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition
 	if Address != '' and j!=1:
 		List += attribute_list[2]
 		List += Address
-		List += ","
+		List += "',"
 		j = j-1
 	elif Address != '' and j==1: 
 		List += attribute_list[2]
 		List += Address
-		List += ""
+		List += "'"
 
 	if  Name_KEY != '' or  condition!='':
 		List += "Where "
 		if Name_KEY != '':
+			List += "Name = '"
 			List += Name_KEY
+			List += "'"
 		else:
 			List += condition
 	List += ";"

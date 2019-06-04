@@ -21,7 +21,7 @@ USE `database` ;
 CREATE TABLE IF NOT EXISTS `database`.`Publishers` (
   `Name` VARCHAR(60) NOT NULL,
   `Address` VARCHAR(60) NULL,
-  `Date of Establishment` INT NULL,
+  `Date_of_Establishment` INT NULL,
   PRIMARY KEY (`Name`))
 ENGINE = InnoDB;
 
