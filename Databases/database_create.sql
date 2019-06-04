@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `database`.`Members` (
   `Name` VARCHAR(60) NULL,
   `Surname` VARCHAR(60) NULL,
   `num_books_borrowed` INT NULL,
-  `Can_Borrow`  BOOLEAN NOT NULL,
+  `Can_Borrow`  TINYINT(1) NOT NULL,
   `LibraryName` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`MemberID`),
   CONSTRAINT `fk_Members_Library1`

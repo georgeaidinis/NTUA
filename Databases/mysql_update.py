@@ -4,9 +4,9 @@ from mysql.connector import MySQLConnection, Error
 from mysql_dbconfig import read_db_config
 
 
-def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 500, Publisher = '', Library = '', ISBN_KEY = '',  condition = ''):
-	coma_counter = [0]*6
-	attribute_list = ["ISBN = '", "Title = '", "Pages = ", "Publication_Year = ", "Publishers_Name = '", "LibraryName = '"]
+def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publisher = '', LibraryName = '', AuthorName='', AuthorSurname='',ISBN_KEY = '',  condition = ''):
+	coma_counter = [0]*8
+	attribute_list = ["ISBN = '", "Title = '", "Pages = ", "Publication_Year = ", "Publishers_Name = '", "LibraryName = '", "AuthorName = '", "AuthorSurname = '"]
 	i = 0
 	
 	if ISBN != '':
@@ -15,12 +15,16 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 500, Publ
 		coma_counter[1] +=1
 	if Pages != 0:
 		coma_counter[2] +=1
-	if Publication_Year != 500:
+	if Publication_Year != 0:
 		coma_counter[3] +=1
 	if Publisher != '':
 		coma_counter[4] +=1
-	if Library != '':
+	if LibraryName != '':
 		coma_counter[5] +=1
+	if AuthorSurname != '':
+		coma_counter[6] +=1
+	if AuthorSurname != '':
+		coma_counter[7] +=1
 	
 	j = sum(coma_counter)
 	List = ["UPDATE Books SET "]
@@ -50,23 +54,23 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 500, Publ
 	if Pages != 0 and j!=1:
 		List += attribute_list[2]
 		List += Pages
-		List += "',"
+		List += ","
 		j = j-1
 	elif Pages != 0 and j==1: 
 		List += attribute_list[2]
 		List += Pages
-		List += "'"
+		List += ""
 
 
-	if Publication_Year != 500 and j!=1:
+	if Publication_Year != 0 and j!=1:
 		List += attribute_list[3]
 		List += Publication_Year
-		List += "',"
+		List += ","
 		j = j-1
-	elif Publication_Year != 500 and j==1: 
+	elif Publication_Year != 0 and j==1: 
 		List += attribute_list[3]
 		List += Publication_Year
-		List += "'"
+		List += ""
 
 	if Publisher != '' and j!=1:
 		List += attribute_list[4]
@@ -78,17 +82,36 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 500, Publ
 		List += Publisher
 		List += "'"
 
-	elif Library != '' and j==1: 
+	if LibraryName != '' and j!=1: 
 		List += attribute_list[5]
 		List += Library
 		List += "'"
+		j = j-1
+	elif LibraryName != '' and j==1: 
+		List += attribute_list[5]
+		List += Publisher
+		List += "'"
+	if AuthorName != '' and j!=1: 
+		List += attribute_list[6]
+		List += Library
+		List += "'"
+		j = j-1
+	elif AuthorName != '' and j==1: 
+		List += attribute_list[6]
+		List += Publisher
+		List += "'"
+	if AuthorSurname != '' and j==1: 
+		List += attribute_list[7]
+		List += Library
+		List += "'"
+		j = j-1
 
-
-	List += "Where "
-	if ISBN_KEY != '':
-		List += ISBN_KEY
-	else:
-		List += condition
+	if ISBN_KEY!= '' and  condition!='':
+		List += "Where "
+		if ISBN_KEY != '':
+			List += ISBN_KEY
+		else:
+			List += condition
 	List += ";"
 
 	query = ''.join(List)
@@ -137,26 +160,306 @@ def update_library (LibraryName):
 		cursor.close()
 		conn.close()
 
-def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = ''):
-	oma_counter = [0]*4
+def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', AuthorID_KEY=0, condition=''):
+	coma_counter = [0]*4
 	attribute_list = ["AuthorID = ", "Name = '", "Surname = '", "Birhtdate = '"]
 	i = 0
 	
-	if ISBN != '':
+	if AuthorID != 0:
 		coma_counter[0] +=1
-	if Title != '':
+	if Name != '':
 		coma_counter[1] +=1
-	if Pages != 0:
+	if Surname != 0:
 		coma_counter[2] +=1
-	if Publication_Year != 500:
+	if Birthdate != '':
 		coma_counter[3] +=1
-	if Publisher != '':
+	j = sum(coma_counter)
+	
+	List = ["UPDATE Authors SET "]
+	if AuthorID != 0 and j!=1:
+		List += attribute_list[0]
+		List += AuthorID
+		List += ","
+		j = j-1
+	elif AuthorID != 0 and j==1: 
+		List += attribute_list[0]
+		List += AuthorID
+
+	
+	if Name != '' and j!=1:
+		List += attribute_list[1]
+		List += Name
+		List += "',"
+		j = j-1
+	elif Name != '' and j==1: 
+		List += attribute_list[1]
+		List += Name
+		List += "'"
+
+
+	if Surname != '' and j!=1:
+		List += attribute_list[2]
+		List += Surname
+		List += "',"
+		j = j-1
+	elif Surname != '' and j==1: 
+		List += attribute_list[2]
+		List += Surname
+		List += "'"
+
+
+	if Birthdate != '' and j!=1:
+		List += attribute_list[3]
+		List += Birthdate
+		List += "',"
+		j = j-1
+	elif Birthdate != '' and j==1: 
+		List += attribute_list[3]
+		List += bi
+		List += "'"
+
+	if AuthorID_KEY!= 0 and  condition!='':
+		List += "Where "
+		if AuthorID_KEY != 0:
+			List += AuthorID_KEY
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:	
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last insert id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-1,Birthdate='',Can_Borrow=-1, LibraryName='NTUA',MemberID_KEY=0, condition=''):
+	coma_counter = [0]*8
+	attribute_list = ["MemberID = ", "Name = '", "Surname = ", "Address = '", "num_books_borrowed = ", "Birthdate = '", "Can_Borrow = ", "LibraryName = '"]
+	i = 0
+	
+	if MemberID != 0:
+		coma_counter[0] +=1
+	if Name != '':
+		coma_counter[1] +=1
+	if Surname != '':
+		coma_counter[2] +=1
+	if Address != '':
+		coma_counter[3] +=1
+	if num_books_borrowed != -1:
 		coma_counter[4] +=1
-	if Library != '':
+	if Birthdate != '':
 		coma_counter[5] +=1
+	if Can_Borrow != -1:
+		coma_counter[6] +=1
+	if 8 != '':
+		coma_counter[7] +=1
 	
 	j = sum(coma_counter)
-	List = ["UPDATE Books SET "]
+	List = ["UPDATE Members SET "]
+
+	if MemberID != 0 and j!=1:
+		List += attribute_list[0]
+		List += MemberID
+		List += ","
+		j = j-1
+	elif MemberID != 0 and j==1: 
+		List += attribute_list[0]
+		List += MemberID
+		List += ""
+
+	
+	if Name != '' and j!=1:
+		List += attribute_list[1]
+		List += Name
+		List += "',"
+		j = j-1
+	elif Name != '' and j==1: 
+		List += attribute_list[1]
+		List += Name
+		List += "'"
+
+
+	if Surname != 0 and j!=1:
+		List += attribute_list[2]
+		List += Surname
+		List += "',"
+		j = j-1
+	elif Surname != 0 and j==1: 
+		List += attribute_list[2]
+		List += Surname
+		List += "'"
+	if Address != '' and j!=1: 
+		List += attribute_list[3]
+		List += Address
+		List += "',"
+		j = j-1
+	elif Address != '' and j==1: 
+		List += attribute_list[3]
+		List += Address
+		List += "'"
+
+	if num_books_borrowed != -1 and j!=1:
+		List += attribute_list[4]
+		List += num_books_borrowed
+		List += ","
+		j = j-1
+	elif num_books_borrowed != -1 and j==1: 
+		List += attribute_list[4]
+		List += num_books_borrowed
+		List += ""
+
+	if Birthdate != '' and j!=1:
+		List += attribute_list[5]
+		List += Birthdate
+		List += "',"
+		j = j-1
+	elif Birthdate != '' and j==1: 
+		List += attribute_list[5]
+		List += Birthdate
+		List += "'"
+
+	if Can_Borrow != -1 and j!=1: 
+		List += attribute_list[6]
+		List += Can_Borrow
+		List += ","
+		j = j-1
+	elif Can_Borrow != -1 and j==1: 
+		List += attribute_list[6]
+		List += Can_Borrow
+		List += ""
+	if LibraryName != '' and j!=1: 
+		List += attribute_list[7]
+		List += LibraryName
+		List += "'"
+		j = j-1
+	elif LibraryName != '' and j==1: 
+		List += attribute_list[7]
+		List += LibraryName
+		List += "'"
+	
+	if MemberID!= 0 and  condition!='':
+		List += "Where "
+		if MemberID != '':
+			List += MemberID
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:	
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last insert id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition=''):
+	coma_counter = [0]*3
+	attribute_list = ["Name = '", "Date_of_Est = '", "Address = '"]
+	i = 0
+	
+	if Name != '':
+		coma_counter[0] +=1
+	if Date_of_Est != '':
+		coma_counter[1] +=1
+	if Address != '':
+		coma_counter[2] +=1
+	
+
+	j = sum(coma_counter)
+	List = ["UPDATE Publishers SET "]
+
+	if Name != '' and j!=1:
+		List += attribute_list[0]
+		List += Name
+		List += "',"
+		j = j-1
+	elif Name != '' and j==1: 
+		List += attribute_list[0]
+		List += Name
+		List += "'"
+
+	
+	if Date_of_Est != '' and j!=1:
+		List += attribute_list[1]
+		List += Date_of_Est
+		List += "',"
+		j = j-1
+	elif Date_of_Est != '' and j==1: 
+		List += attribute_list[1]
+		List += Date_of_Est
+		List += "'"
+
+
+	if Address != '' and j!=1:
+		List += attribute_list[2]
+		List += Address
+		List += ","
+		j = j-1
+	elif Address != '' and j==1: 
+		List += attribute_list[2]
+		List += Address
+		List += ""
+
+	if  Name_KEY != '' and  condition!='':
+		List += "Where "
+		if Name_KEY != '':
+			List += Name_KEY
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:	
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last insert id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
 
 
 def main():
