@@ -4,8 +4,9 @@ from mysql.connector import MySQLConnection, Error
 from mysql_dbconfig import read_db_config
 
 
-def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publisher = '', LibraryName = '', AuthorName='', AuthorSurname='',ISBN_KEY = '',  condition = ''):
+def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publisher = '', LibraryName = '', Author='',ISBN_KEY = '',  condition = ''):
 	coma_counter = [0]*8
+	AuthorName, AuthorSurname = div_first_last(Author)
 	attribute_list = ["ISBN = '", "Title = '", "Pages = ", "Publication_Year = ", "Publishers_Name = '", "LibraryName = '", "AuthorName = '", "AuthorSurname = '"]
 	i = 0
 	
@@ -267,7 +268,7 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 		coma_counter[5] +=1
 	if Can_Borrow != -1:
 		coma_counter[6] +=1
-	if 8 != '':
+	if LibraryName != '':
 		coma_counter[7] +=1
 	
 	j = sum(coma_counter)
@@ -463,6 +464,6 @@ def update_publishers(Name='', Date_of_Est='', Address='',Name_KEY='', condition
 
 
 def main():
-
+	return
 if __name__ == '__main__':
     main()
