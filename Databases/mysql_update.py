@@ -5,6 +5,36 @@ from mysql_dbconfig import read_db_config
 from split import div_first_last
 
 
+
+"""
+Contents:
+
+1)	update_book
+2)	update_Library
+3)	update_Author
+4)	update_Member
+5)	update_Publisher
+6)	update_Staff
+7)	update_Copy
+8)	update_Authored
+9)	update_Belongs
+10)	update_Temporary
+11)	update_Permanent
+12)	update_Borrows
+13)	update_Category
+14)	update_Reminds
+
+
+
+main
+
+
+"""
+
+
+
+
+
 def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publisher = '', LibraryName = '', Author='',ISBN_KEY = '',  condition = ''):
 	coma_counter = [0]*8
 	if Author == '':
@@ -136,7 +166,7 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publis
 		if cursor.lastrowid:
 			print('done')
 		else:
-			print('last insert id not found')
+			print('last update id not found')
 
 		conn.commit()
 	except Error as error:
@@ -161,7 +191,7 @@ def update_library (LibraryName):
 		if cursor.lastrowid:
 			print('done')
 		else:
-			print('last insert id not found')
+			print('last update id not found')
 
 		conn.commit()
 	except Error as error:
@@ -250,7 +280,7 @@ def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', Author
 		if cursor.lastrowid:
 			print('done')
 		else:
-			print('last insert id not found')
+			print('last update id not found')
 
 		conn.commit()
 	except Error as error:
@@ -389,7 +419,7 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 		if cursor.lastrowid:
 			print('done')
 		else:
-			print('last insert id not found')
+			print('last update id not found')
 
 		conn.commit()
 	except Error as error:
@@ -471,7 +501,7 @@ def update_publishers(Name='', Date_of_Establishment='', Address='',Name_KEY='',
 		if cursor.lastrowid:
 			print('done')
 		else:
-			print('last insert id not found')
+			print('last update id not found')
 
 		conn.commit()
 	except Error as error:
@@ -481,6 +511,786 @@ def update_publishers(Name='', Date_of_Establishment='', Address='',Name_KEY='',
 		cursor.close()
 		conn.close()
 
+def update_Staff(StaffID = 0,Name = '',Pay = 0,Surname = '',LibraryName = '', StaffID_KEY = 0, condition = ''):
+	coma_counter = [0]*5
+	attribute_list = ["StaffID = ", "Name = '", "Pay = ", "Surname = '", "LibraryName = '"]
+	i = 0
+
+	if StaffID == '0':
+		StaffID = 0
+
+
+	if StaffID != 0:
+		coma_counter[0] +=1
+	if Name != '':
+		coma_counter[1] +=1
+	if Pay != 0:
+		coma_counter[2] +=1
+	if Surname != '':
+		coma_counter[3] +=1
+	if LibraryName!='':
+		coma_counter[4] +=1
+
+
+	j = sum(coma_counter)
+	List = ["UPDATE Staff SET "]
+
+
+
+	if StaffID != 0 and j!=1:
+		List += attribute_list[0]
+		List += StaffID
+		List += ","
+		j = j-1
+	elif StaffID != 0 and j==1:
+		List += attribute_list[0]
+		List += StaffID
+		List += ""
+
+
+	if Name != '' and j!=1:
+		List += attribute_list[1]
+		List += Name
+		List += "',"
+		j = j-1
+	elif Name != '' and j==1:
+		List += attribute_list[1]
+		List += Name
+		List += "'"
+
+
+	if Pay != 0 and j!=1:
+		List += attribute_list[2]
+		List += Pay
+		List += ","
+		j = j-1
+	elif Pay != 0 and j==1:
+		List += attribute_list[2]
+		List += Pay
+		List += ""
+
+
+	if Surname != '' and j!=1:
+		List += attribute_list[3]
+		List += Surname
+		List += "',"
+		j = j-1
+	elif Surname != '' and j==1:
+		List += attribute_list[3]
+		List += Surname
+		List += "'"
+
+
+	if LibraryName != '' and j!=1:
+		List += attribute_list[4]
+		List += LibraryName
+		List += "',"
+		j = j-1
+	elif LibraryName != '' and j==1:
+		List += attribute_list[4]
+		List += LibraryName
+		List += "'"
+
+	if  StaffID_KEY != 0 or  condition!='':
+		List += "Where "
+		if StaffID_KEY != '':
+			List += "StaffID = "
+			List += StaffID_KEY
+			List += ""
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_Copy(Number = 0, Books_ISBN = '', Position = '', Number_KEY = 0, Books_ISBN_KEY = '', condition = ''):
+	coma_counter = [0]*3
+	attribute_list = ["Number = ", "Books_ISBN = '", "Position = '"]
+
+	i = 0
+
+	if Number == '0':
+		Number = 0
+	if Number_KEY == '0':
+		Number_KEY = 0
+
+
+	if Number != 0:
+		coma_counter[0] +=1
+	if Books_ISBN != '':
+		coma_counter[1] +=1
+	if Position != '':
+		coma_counter[2] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Copy SET "]
+
+
+	if Number != 0 and j!=1:
+		List += attribute_list[0]
+		List += Number
+		List += ","
+		j = j-1
+	elif Number != 0 and j==1:
+		List += attribute_list[0]
+		List += Number
+		List += ""
+
+
+	if Books_ISBN != '' and j!=1:
+		List += attribute_list[1]
+		List += Books_ISBN
+		List += "',"
+		j = j-1
+	elif Books_ISBN != '' and j==1:
+		List += attribute_list[1]
+		List += Books_ISBN
+		List += "'"
+
+	if Position != '' and j!=1:
+		List += attribute_list[2]
+		List += Position
+		List += "',"
+		j = j-1
+	elif Position != '' and j==1:
+		List += attribute_list[2]
+		List += Position
+		List += "'"
+
+
+	if  (Number_KEY != 0 and Books_ISBN_KEY!='') or  condition!='':
+		List += "Where "
+		if Number_KEY != 0 and Books_ISBN_KEY!='':
+			List += "Number = "
+			List += Number_KEY
+			List += ", Books_ISBN = '"
+			List += Books_ISBN_KEY
+			List += "'"
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_Authored(Authors_AuthorID = 0, Books_ISBN = '', Authors_AuthorID_KEY = 0, Books_ISBN_KEY = '', condition = ''):
+	coma_counter = [0]*2
+	attribute_list = ["Authors_AuthorID = ", "Books_ISBN = '"]
+	i = 0
+
+	if Authors_AuthorID == '0':
+		Authors_AuthorID = 0
+
+	if Authors_AuthorID != 0:
+		coma_counter[0] +=1
+	if Books_ISBN != '':
+		coma_counter[1] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Authored SET "]
+
+	if Authors_AuthorID != 0 and j!=1:
+		List += attribute_list[0]
+		List += Authors_AuthorID
+		List += ","
+		j = j-1
+	elif Authors_AuthorID != 0 and j==1:
+		List += attribute_list[0]
+		List += Authors_AuthorID
+		List += ""
+
+
+	if Books_ISBN != '' and j!=1:
+		List += attribute_list[1]
+		List += Books_ISBN
+		List += "',"
+		j = j-1
+	elif Books_ISBN != '' and j==1:
+		List += attribute_list[1]
+		List += Books_ISBN
+		List += "'"
+
+	if  (Authors_AuthorID_KEY != 0 and Books_ISBN_KEY!='') or  condition!='':
+		List += "Where "
+		if Authors_AuthorID_KEY != 0 and Books_ISBN_KEY!='':
+			List += "Authors_AuthorID = "
+			List += Authors_AuthorID_KEY
+			List += ", Books_ISBN = '"
+			List += Books_ISBN_KEY
+			List += "'"
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_Belongs(Books_ISBN = '', Category_Name = '', Books_ISBN_KEY = '', Category_Name_KEY = '', condition = ''):
+	coma_counter = [0]*2
+	attribute_list = ["Books_ISBN = '", "Category_Name = '"]
+	i = 0
+
+
+	if Books_ISBN != '':
+		coma_counter[0] +=1
+	if Category_Name != '':
+		coma_counter[1] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Belongs SET "]
+
+
+	if Books_ISBN != '' and j!=1:
+		List += attribute_list[0]
+		List += Books_ISBN
+		List += "',"
+		j = j-1
+	elif Books_ISBN != '' and j==1:
+		List += attribute_list[0]
+		List += Books_ISBN
+		List += "'"
+
+	if Category_Name != '' and j!=1:
+		List += attribute_list[1]
+		List += Category_Name
+		List += "',"
+		j = j-1
+	elif Category_Name != '' and j==1:
+		List += attribute_list[1]
+		List += Category_Name
+		List += "'"
+
+
+
+	if  (Books_ISBN_KEY != '' and Category_Name_KEY!='') or  condition!='':
+		List += "Where "
+		if Books_ISBN_KEY != '' and Category_Name_KEY!='':
+			List += "Books_ISBN = '"
+			List += Books_ISBN_KEY
+			List += "', Category_Name = '"
+			List += Books_ISBN_KEY
+			List += "'"
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+
+def update_Temporary(Staff_StaffID = 0, ContractID = 0, Staff_StaffID_KEY = 0, condition = ''):
+
+	coma_counter = [0]*2
+	attribute_list = ["Staff_StaffID = ", "ContractID = "]
+	i = 0
+
+	if Staff_StaffID == '0':
+		Staff_StaffID = 0
+
+	if ContractID == '0':
+		ContractID = 0
+
+
+	if Staff_StaffID_KEY == '0':
+		Staff_StaffID_KEY = 0
+
+
+	if Staff_StaffID != 0:
+		coma_counter[0] +=1
+	if ContractID != 0:
+		coma_counter[1] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Temporary SET "]
+
+	if Staff_StaffID != 0 and j!=1:
+		List += attribute_list[0]
+		List += Staff_StaffID
+		List += ","
+		j = j-1
+	elif Staff_StaffID != 0 and j==1:
+		List += attribute_list[0]
+		List += Staff_StaffID
+		List += ""
+
+
+	if ContractID != 0 and j!=1:
+		List += attribute_list[1]
+		List += ContractID
+		List += ","
+		j = j-1
+	elif ContractID != 0 and j==1:
+		List += attribute_list[1]
+		List += ContractID
+		List += ""
+
+	if  Staff_StaffID_KEY != 0 or  condition!='':
+		List += "Where "
+		if Staff_StaffID_KEY != 0:
+			List += "Staff_StaffID = "
+			List += Staff_StaffID_KEY
+			List += ""
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_Permanent(Staff_StaffID = 0, Hiring_Date = '', Staff_StaffID_KEY = 0, condition = ''):
+	coma_counter = [0]*2
+	attribute_list = ["Staff_StaffID = ", "Hiring_Date = '"]
+	i = 0
+
+	if Staff_StaffID == '0':
+		Staff_StaffID = 0
+
+	if Staff_StaffID_KEY == '0':
+		Staff_StaffID_KEY = 0
+
+
+	if Staff_StaffID != 0:
+		coma_counter[0] +=1
+	if Hiring_Date != '':
+		coma_counter[1] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Permanent SET "]
+
+	if Staff_StaffID != 0 and j!=1:
+		List += attribute_list[0]
+		List += Staff_StaffID
+		List += ","
+		j = j-1
+	elif Staff_StaffID != 0 and j==1:
+		List += attribute_list[0]
+		List += Staff_StaffID
+		List += ""
+
+
+	if Hiring_Date != '' and j!=1:
+		List += attribute_list[1]
+		List += Hiring_Date
+		List += "',"
+		j = j-1
+	elif Hiring_Date != '' and j==1:
+		List += attribute_list[1]
+		List += Hiring_Date
+		List += "'"
+
+	if  Staff_StaffID_KEY  or  condition!='':
+		List += "Where "
+		if Staff_StaffID_KEY != 0:
+			List += "Staff_StaffID = "
+			List += Authors_AuthorID_KEY
+			List += ""
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+def update_Borrows(Members_MemberID = 0, Copy_Number = 0, Copy_Books_ISBN = '', Start_Date = '', Return_Date = '', Due_Date = '', Members_MemberID_KEY = 0, Copy_Number_KEY = 0, Copy_Books_ISBN_KEY = '', condition = ''):
+	coma_counter = [0]*6
+	attribute_list = ["Members_MemberID = ", "Copy_Number = ", "Copy_Books_ISBN = '", "Start_Date = '", "Return_Date = '", "Due_Date = '"]
+	i = 0
+	if Members_MemberID == '0':
+		Members_MemberID = 0
+	if Copy_Number == '0':
+		Copy_Number = 0
+
+
+	if Members_MemberID != 0:
+		coma_counter[0] +=1
+	if Copy_Number != 0:
+		coma_counter[1] +=1
+	if Copy_Books_ISBN != '':
+		coma_counter[2] +=1
+	if Start_Date != '':
+		coma_counter[3] +=1
+	if Return_Date != '':
+		coma_counter[4] +=1
+	if Due_Date != '':
+		coma_counter[5] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Borrows SET "]
+
+
+
+	if Members_MemberID != 0 and j!=1:
+		List += attribute_list[0]
+		List += Members_MemberID
+		List += ","
+		j = j-1
+	elif Members_MemberID != 0 and j==1:
+		List += attribute_list[0]
+		List += Members_MemberID
+		List += ""
+
+
+	if Copy_Number != 0 and j!=1:
+		List += attribute_list[1]
+		List += Copy_Number
+		List += ","
+		j = j-1
+	elif Copy_Number != 0 and j==1:
+		List += attribute_list[1]
+		List += Copy_Number
+		List += ""
+
+
+	if Copy_Books_ISBN != '' and j!=1:
+		List += attribute_list[2]
+		List += Copy_Books_ISBN
+		List += "',"
+		j = j-1
+	elif Copy_Books_ISBN != '' and j==1:
+		List += attribute_list[2]
+		List += Copy_Books_ISBN
+		List += "'"
+
+
+	if Start_Date != '' and j!=1:
+		List += attribute_list[3]
+		List += Start_Date
+		List += "',"
+		j = j-1
+	elif Start_Date != '' and j==1:
+		List += attribute_list[3]
+		List += Start_Date
+		List += "'"
+
+
+	if Return_Date != '' and j!=1:
+		List += attribute_list[4]
+		List += Return_Date
+		List += "',"
+		j = j-1
+	elif Return_Date != '' and j==1:
+		List += attribute_list[4]
+		List += Return_Date
+		List += "'"
+
+
+	if Due_Date != '' and j!=1:
+		List += attribute_list[5]
+		List += Due_Date
+		List += "',"
+		j = j-1
+	elif Due_Date != '' and j==1:
+		List += attribute_list[5]
+		List += Due_Date
+		List += "'"
+
+
+
+	if  (Members_MemberID_KEY != 0 and Copy_Number_KEY!=0 and Copy_Books_ISBN_KEY!='') or  condition!='':
+		List += "Where "
+		if Members_MemberID_KEY != 0 and Copy_Number_KEY!=0 and Copy_Books_ISBN_KEY!='':
+			List += "Members_MemberID = "
+			List += Members_MemberID_KEY
+			List += ", Copy_Number = "
+			List += Copy_Number_KEY
+			List += ", Copy_Books_ISBN = '"
+			List += Copy_Books_ISBN_KEY
+			List += "'"
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+
+def update_Category(Name ='', Parent_category = '', Name_KEY = '', condition = ''):
+	coma_counter = [0]*2
+	attribute_list = ["Name = '", "Parent_category = '"]
+	i = 0
+
+
+	if Name != '':
+		coma_counter[0] +=1
+	if Parent_category != '':
+		coma_counter[1] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Category SET "]
+
+
+	if Name != '' and j!=1:
+		List += attribute_list[0]
+		List += Name
+		List += "',"
+		j = j-1
+	elif Name != '' and j==1:
+		List += attribute_list[0]
+		List += Name
+		List += "'"
+
+	if Parent_category != '' and j!=1:
+		List += attribute_list[1]
+		List += Parent_category
+		List += "',"
+		j = j-1
+	elif Parent_category != '' and j==1:
+		List += attribute_list[1]
+		List += Parent_category
+		List += "'"
+
+
+
+	if  Name_KEY != '' or  condition!='':
+		List += "Where "
+		if Name_KEY != '':
+			List += "Name = '"
+			List += Name_KEY
+			List += "'"
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+
+def update_Reminds(Staff_StaffID = 0, Members_MemberID = 0, Date_of_Reminder = '', Staff_StaffID_KEY = 0, Members_MemberID_KEY = 0, condition = ''):
+	coma_counter = [0]*3
+	attribute_list = ["Staff_StaffID = ", "Members_MemberID = ", "Date_of_Reminder = '"]
+	i = 0
+	if Staff_StaffID == '0':
+		Staff_StaffID = 0
+	if Members_MemberID == '0':
+		Members_MemberID = 0
+
+
+	if Staff_StaffID != 0:
+		coma_counter[0] +=1
+	if Members_MemberID != 0:
+		coma_counter[1] +=1
+	if Date_of_Reminder != '':
+		coma_counter[2] +=1
+
+	j = sum(coma_counter)
+	List = ["UPDATE Reminds SET "]
+
+
+	if Staff_StaffID != 0 and j!=1:
+		List += attribute_list[0]
+		List += Staff_StaffID
+		List += ","
+		j = j-1
+	elif Staff_StaffID != 0 and j==1:
+		List += attribute_list[0]
+		List += Staff_StaffID
+		List += ""
+
+
+	if Members_MemberID != 0 and j!=1:
+		List += attribute_list[1]
+		List += Members_MemberID
+		List += ","
+		j = j-1
+	elif Members_MemberID != 0 and j==1:
+		List += attribute_list[1]
+		List += Members_MemberID
+		List += ""
+
+
+	if Date_of_Reminder != '' and j!=1:
+		List += attribute_list[2]
+		List += Date_of_Reminder
+		List += "',"
+		j = j-1
+	elif Date_of_Reminder != '' and j==1:
+		List += attribute_list[2]
+		List += Date_of_Reminder
+		List += "'"
+
+	if  (Staff_StaffID_KEY != 0 and Members_MemberID_KEY!=0) or  condition!='':
+		List += "Where "
+		if (Staff_StaffID_KEY != 0 and Members_MemberID_KEY!=0):
+			List += "Staff_StaffID = "
+			List += Staff_StaffID_KEY
+			List += ", Members_MemberID = "
+			List += Members_MemberID_KEY
+			List += ""
+		else:
+			List += condition
+	List += ";"
+
+	query = ''.join(List)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last update id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
 
 
 def main():
