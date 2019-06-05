@@ -1,7 +1,8 @@
 #!/bin/bash
-mysql < ./database_delete.sql
-mysql < ./database_create.sql
-mysql < ./database_create_views.sql
+mysql < source database_delete.sql
+mysql < source database_create.sql
+mysql < source database_create_views.sql
 python3 mysql_insert.py
-mysql < authored_create.sql
-mysql < triggers.sql
+mysql < source authored_create.sql
+mysql < source triggers.sql
+mysql < source database_insert_rest.sql

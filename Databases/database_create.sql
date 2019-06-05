@@ -166,7 +166,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`Permanent` (
   `Staff_StaffID` INT NOT NULL,
-  `HIring Date` DATE NOT NULL,
+  `Hiring_Date` DATE NOT NULL,
   PRIMARY KEY (`Staff_StaffID`),
   INDEX `fk_Permanent_Staff1_idx` (`Staff_StaffID` ASC),
   CONSTRAINT `fk_Permanent_Staff1`
