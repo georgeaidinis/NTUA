@@ -228,7 +228,7 @@ def delete_Members(MemberID = 0, condition = ''):
 
 
 def main():
-	delete_Members(condition = "Surname like 'S%'")
+	delete_Books(ISBN = "")
  
 if __name__ == '__main__':
     main()
