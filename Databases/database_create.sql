@@ -253,7 +253,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `database`.`Reminds` (
   `Staff_StaffID` INT NOT NULL,
   `Members_MemberID` INT NOT NULL,
-  `Date of Reminder` DATE NULL,
+  `Date_of_Reminder` DATE NULL,
   PRIMARY KEY (`Staff_StaffID`, `Members_MemberID`),
   INDEX `fk_Staff_has_Members_Members1_idx` (`Members_MemberID` ASC),
   INDEX `fk_Staff_has_Members_Worker_idx` (`Staff_StaffID` ASC),

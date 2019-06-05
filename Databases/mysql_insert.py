@@ -10,18 +10,21 @@ from split import div_first_last
 """
 Contents:
 
-insert_book
-insert_Library
-insert_Publisher
-insert_Member
-insert_Author
-insert_Staff
-insert_Copy
-insert_Authored
-insert_Belongs
-insert_Temporary
-insert_Permanent
-insert_Borrows
+1)	insert_book
+2)	insert_Library
+3)	insert_Publisher
+4)	insert_Member
+5)	insert_Author
+6)	insert_Staff
+7)	insert_Copy
+8)	insert_Authored
+9)	insert_Belongs
+10)	insert_Temporary
+11)	insert_Permanent
+12)	insert_Borrows
+13)	insert_Category
+14)	insert_Reminds
+
 
 
 main
@@ -398,9 +401,51 @@ def insert_Borrows(Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date, R
 		cursor.close()
 		conn.close()
 
+def insert_Category(Name, Parent_category):
+	query = "INSERT INTO Category VALUES (%s,%s)"
+	args = (Name, Parent_category)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
 
+		cursor = conn.cursor()
+		cursor.execute(query, args)
 
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last insert id not found')
 
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
+
+def insert_Reminds(Staff_StaffID, Members_MemberID, Date_of_Reminder):
+	query = "INSERT INTO Reminds VALUES (%s,%s,%s)"
+	args = (Staff_StaffID, Members_MemberID, Date_of_Reminder)
+	try:
+		db_config = read_db_config()
+		conn = MySQLConnection(**db_config)
+
+		cursor = conn.cursor()
+		cursor.execute(query, args)
+
+		if cursor.lastrowid:
+			print('done')
+		else:
+			print('last insert id not found')
+
+		conn.commit()
+	except Error as error:
+		print(error)
+
+	finally:
+		cursor.close()
+		conn.close()
 
 
 def main():
@@ -428,6 +473,12 @@ def main():
 	insert_Staff("Donald Jr", 6,"Trump", "NTUA")
 	insert_Staff("Tiffany", 7,"Trump", "NTUA")
 	insert_Staff("Eric", 8,"Trump", "NTUA")
+	"""insert_Borrows(1,1,"101-1312-1148","2019-01-01",'null', "2019-02-01")
+	insert_Permanent(4,"2017-01-20")
+	insert_Temporary(1,1)
+	insert_Belongs("101-1312-2133","Romance")
+	insert_Category("Romance", "Romance")
+	insert_Reminds(1,12,"null")"""
  
 if __name__ == '__main__':
     main()

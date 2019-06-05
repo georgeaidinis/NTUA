@@ -169,5 +169,5 @@ INSERT INTO Permanent VALUES (9,"2017-01-20");
 -- ---------------------------------
 
 INSERT INTO Temporary VALUES (1,1);
-INSERT INTO Temporary VALUES (2,1);
-INSERT INTO Temporary VALUES (3,1);
+INSERT INTO Temporary VALUES (2,2);
+INSERT INTO Temporary VALUES (3,3);
