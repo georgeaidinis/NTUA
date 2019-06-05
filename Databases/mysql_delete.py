@@ -10,18 +10,18 @@ def delete_Books(ISBN = '', condition = ''):
 	if ISBN== '' and condition=='':
 		query = "DELETE FROM Books;"
 		try:
-		db_config = read_db_config()
-		conn = MySQLConnection(**db_config)
+			db_config = read_db_config()
+			conn = MySQLConnection(**db_config)
 
-		cursor = conn.cursor()
-		cursor.execute(query, args)
+			cursor = conn.cursor()
+			cursor.execute(query)
 
-		if cursor.lastrowid:
-			print('done')
-		else:
-			print('last insert id not found')
+			if cursor.lastrowid:
+				print('done')
+			else:
+				print('last insert id not found')
 
-		conn.commit()
+			conn.commit()
 		except Error as error:
 			print(error)
 
@@ -30,17 +30,19 @@ def delete_Books(ISBN = '', condition = ''):
 			conn.close()
 
 	elif ISBN!= '':
-		query = "DELETE FROM Books WHERE ISBN = %s;"
-		args = (ISBN)
+		query = "DELETE FROM Books WHERE ISBN = '"
+		query += ISBN
+		query +="';"
 	else:
-		query = "DELETE FROM Books WHERE %s;"
-		args = (condition)
+		query = "DELETE FROM Books WHERE  "
+		query += condition
+		query +=";"
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
 
 		cursor = conn.cursor()
-		cursor.execute(query, args)
+		cursor.execute(query)
 
 		if cursor.lastrowid:
 			print('done')
@@ -58,22 +60,22 @@ def delete_Books(ISBN = '', condition = ''):
 
 
 
-def delete_Publisher(Name = '', condition''):
+def delete_Publishers(Name = '', condition=''):
 	if Name== '' and condition=='':
 		query = "DELETE FROM Publishers;"
 		try:
-		db_config = read_db_config()
-		conn = MySQLConnection(**db_config)
+			db_config = read_db_config()
+			conn = MySQLConnection(**db_config)
 
-		cursor = conn.cursor()
-		cursor.execute(query, args)
+			cursor = conn.cursor()
+			cursor.execute(query)
 
-		if cursor.lastrowid:
-			print('done')
-		else:
-			print('last insert id not found')
+			if cursor.lastrowid:
+				print('done')
+			else:
+				print('last insert id not found')
 
-		conn.commit()
+			conn.commit()
 		except Error as error:
 			print(error)
 
@@ -82,17 +84,19 @@ def delete_Publisher(Name = '', condition''):
 			conn.close()
 
 	elif Name!= '':
-		query = "DELETE FROM Publishers WHERE Name = %s;"
-		args = (Name)
+		query = "DELETE FROM Publishers WHERE Name = '"
+		query += Name
+		query += "';"
 	else:
-		query = "DELETE FROM Publishers WHERE %s;"
-		args = (condition)
+		query = "DELETE FROM Publishers WHERE "
+		query += condition
+		query += ";"
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
 
 		cursor = conn.cursor()
-		cursor.execute(query, args)
+		cursor.execute(query)
 
 		if cursor.lastrowid:
 			print('done')
@@ -108,22 +112,22 @@ def delete_Publisher(Name = '', condition''):
 		conn.close()
 
 
-def delete_Author(AuthorID = 0, condition = ''):
+def delete_Authors(AuthorID = 0, condition = ''):
 	if AuthorID== 0 and condition=='':
 		query = "DELETE FROM Authors;"
 		try:
-		db_config = read_db_config()
-		conn = MySQLConnection(**db_config)
+			db_config = read_db_config()
+			conn = MySQLConnection(**db_config)
 
-		cursor = conn.cursor()
-		cursor.execute(query, args)
+			cursor = conn.cursor()
+			cursor.execute(query)
 
-		if cursor.lastrowid:
-			print('done')
-		else:
-			print('last insert id not found')
+			if cursor.lastrowid:
+				print('done')
+			else:
+				print('last insert id not found')
 
-		conn.commit()
+			conn.commit()
 		except Error as error:
 			print(error)
 
@@ -132,17 +136,19 @@ def delete_Author(AuthorID = 0, condition = ''):
 			conn.close()
 
 	elif AuthorID!= 0:
-		query = "DELETE FROM Authors WHERE AuthorID = %s;"
-		args = (AuthorID)
+		query = "DELETE FROM Authors WHERE AuthorID = "
+		query += str(AuthoID)
+		query += ";"
 	else:
-		query = "DELETE FROM Authors WHERE %s;"
-		args = (condition)
+		query = "DELETE FROM Authors WHERE "
+		query += condition
+		query += ";"
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
 
 		cursor = conn.cursor()
-		cursor.execute(query, args)
+		cursor.execute(query)
 
 		if cursor.lastrowid:
 			print('done')
@@ -157,22 +163,22 @@ def delete_Author(AuthorID = 0, condition = ''):
 		cursor.close()
 		conn.close()
 
-def delete_Member(MemberID = 0, condition = ''):
+def delete_Members(MemberID = 0, condition = ''):
 	if MemberID== 0 and condition=='':
 		query = "DELETE FROM Members;"
 		try:
-		db_config = read_db_config()
-		conn = MySQLConnection(**db_config)
+			db_config = read_db_config()
+			conn = MySQLConnection(**db_config)
 
-		cursor = conn.cursor()
-		cursor.execute(query, args)
+			cursor = conn.cursor()
+			cursor.execute(query)
 
-		if cursor.lastrowid:
-			print('done')
-		else:
-			print('last insert id not found')
+			if cursor.lastrowid:
+				print('done')
+			else:
+				print('last insert id not found')
 
-		conn.commit()
+			conn.commit()
 		except Error as error:
 			print(error)
 
@@ -181,17 +187,19 @@ def delete_Member(MemberID = 0, condition = ''):
 			conn.close()
 
 	elif MemberID!= 0:
-		query = "DELETE FROM Members WHERE MemberID = %s;"
-		args = (MemberID)
+		query = "DELETE FROM Members WHERE MemberID = "
+		query += str(MemberID)
+		query += ";"
 	else:
-		query = "DELETE FROM Members WHERE %s;"
-		args = (condition)
+		query = "DELETE FROM Members WHERE "
+		query += condition
+		query += ";"
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)
 
 		cursor = conn.cursor()
-		cursor.execute(query, args)
+		cursor.execute(query)
 
 		if cursor.lastrowid:
 			print('done')
@@ -220,7 +228,7 @@ def delete_Member(MemberID = 0, condition = ''):
 
 
 def main():
-	return
+	delete_Members(condition = "Surname like 'S%'")
  
 if __name__ == '__main__':
     main()
