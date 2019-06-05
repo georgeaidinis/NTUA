@@ -236,6 +236,15 @@ def main():
 	for x in read_the_file('copies.csv'):
 		insert_copy(*x)
 	#insert_Member("George","Aidinis","Pindou",0,"1998-06-04",1,"NTUA")
+	insert_Staff("Theodor", 42,"Tsilivis", "NTUA")
+	insert_Staff("George", 4200,"Aidinis", "NTUA")
+	insert_Staff("Pheivws", 420,"Kalogiannis", "NTUA")
+	insert_Staff("Donald John", 3,"Trump", "NTUA")
+	insert_Staff("Melania", 4,"Trump", "NTUA")
+	insert_Staff("Ivanka", 5,"Trump", "NTUA")
+	insert_Staff("Donald Jr", 6,"Trump", "NTUA")
+	insert_Staff("Tiffany", 7,"Trump", "NTUA")
+	insert_Staff("Eric", 8,"Trump", "NTUA")
  
 if __name__ == '__main__':
     main()
