@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>Main Parent Template</title>
+
+   <style> body {
+   background-color: #ffffff;
+   text-align:left;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+    }
+
+   h1 { color: indigo; text-align: left;}
+   p { color: blue; text-align: left;}
+   table{
+       text-align: center;
+   }
+    background-image: url({{ url_for('static', filename='img/cool.png') }})
+
+
+    .MyImageButton
+    {
+        cursor: hand;
+    }
+   ul {
+      top: 0;
+      width: 100%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 2px solid #420420;
+      border-radius: 5px;
+      /* background-color: #e066ff; */
+    }
+
+    li {
+      float: left;
+      color: indigo;
+    }
+
+    li a {
+      display: block;
+
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+      background-color: #111;
+    }
+
+    .active {
+      /* background-color: #4CAF50; */
+    }
+
+   </style>
+
+ </head>
+    <body background="{{ url_for('static', filename='img/cool.png') }}">
+ <body>
+    <header>
+      <div class="container">
+          <strong><nav>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/RestrictedView">Restricted View</a></li>
+                  <li><a href="/View">View</a></li>
+                  <li><a href="/Edit">Edit</a></li>
+                  <li style="float:right"><a class="active" href="/About">About</a></li>
+              </ul>
+          </nav></strong>
+                </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+ </body>
+</html>

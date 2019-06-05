@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <h1>For authorized personnel only</h1>
+
+    <p> <i>What would you like to add</i></p>
+
+    <select name="forma" onchange="location = this.value;">
+     <option value="SELECT ACTION">Select action</option>
+
+     <option value="UpdateBooks">Update a Book</option>
+     <option value="UpdatePublishers">Update a Publisher</option>
+     <option value="UpdateMembers">Update a Member</option>
+    </select>
+
+    {% endblock %}
+  </body>
+</html>

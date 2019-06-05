@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+        <h1> Viewing Page </h1>
+
+        <p> <i> Select from the list below the table you would like to see</i></p>
+
+        <select name="forma" onchange="location = this.value;">
+         <option value="SELECT TABLE">Select table</option>
+
+         <option value="Books">Books</option>
+         <option value="Publishers">Publishers</option>
+         <option value="Authors">Authors</option>
+         <option value="Members">Members</option>
+         <option value="Copies">Copies</option>
+        </select>
+
+
+    {% endblock %}
+  </body>
+</html>

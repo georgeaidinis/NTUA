@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <form form method="POST" action="">
+      <table>
+          <tr>
+            <td align="left">MemberID:</td>
+            <td align="left"><input type="number" name="MemberID" required/></td>
+          </tr>
+          <tr>
+            <td align="left">Name:</td>
+            <td align="left"><input type="text" name="Name" value=''/></td>
+          </tr>
+          <tr>
+            <td align="left">Surname:</td>
+            <td align="left"><input type="text" name="Surname" value=''/></td>
+          </tr>
+        <tr>
+          <td align="left">Address:</td>
+          <td align="left"><input type="text" name="Address" value=''/></td>
+        </tr>
+        <tr>
+          <td align="left">Number of Books Borrowed</td>
+          <td align="left"><input type="number" name="Number_of_Borrowed_Books" value='-1'/></td>
+        </tr>
+        <tr>
+          <td align="left">Can Borrow</td>
+          <td align="left"><input type="number" name="Can_Borrow" value='-1'/></td>
+        </tr>
+        <tr>
+          <td align="left">Birtdate:</td>
+          <td align="left"><input type="date" name="Birthdate" value=''/></td>
+        </tr>
+    </table>
+    <input type="submit">
+  </form>
+
+    {% endblock %}
+  </body>
+</html>

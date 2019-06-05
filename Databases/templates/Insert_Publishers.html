@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <form form method="POST" action="">
+      <table>
+        <tr>
+          <td align="left">Name:</td>
+          <td align="left"><input type="text" name="Name" required/></td>
+        </tr>
+        <tr>
+          <td align="left">Address:</td>
+          <td align="left"><input type="text" name="Address" /></td>
+        </tr>
+        <tr>
+          <td align="left">Date of Establishment:</td>
+          <td align="left"><input type="number" name="Date of Establishment" /></td>
+        </tr>
+        </table>
+        <input type="submit">
+    </form>
+
+    {% endblock %}
+  </body>
+</html>

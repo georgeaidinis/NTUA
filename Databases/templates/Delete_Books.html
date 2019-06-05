@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <form form method="POST" action="">
+  <table>
+    <tr>
+      <td align="left">ISBN:</td>
+      <td align="left"><input type="text" name="ISBN" required/></td>
+    </tr>
+  </table>
+    <input type="submit">
+  </form>
+
+    {% endblock %}
+  </body>
+</html>

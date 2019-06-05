@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <form form method="POST" action="">
+  <table>
+    <tr>
+      <td align="left">ISBN:</td>
+      <td align="left"><input type="text" name="ISBN" required/></td>
+    </tr>
+    <tr>
+      <td align="left">Title:</td>
+      <td align="left"><input type="text" name="Title" /></td>
+    </tr>
+    <tr>
+      <td align="left">Pages:</td>
+      <td align="left"><input type="number" name="Pages" /></td>
+    </tr>
+    <tr>
+      <td align="left">Publication Year:</td>
+      <td align="left"><input type="text" name="Publication_Year" /></td>
+    </tr>
+    <tr>
+      <td align="left">Publishers Name:</td>
+      <td align="left"><input type="text" name="Publishers_Name" required/></td>
+    </tr>
+    <tr>
+      <td align="left">Author:</td>
+      <td align="left"><input type="text" name="Author" required/></td>
+    </tr>
+  </table>
+    <input type="submit">
+  </form>
+
+    {% endblock %}
+  </body>
+</html>
