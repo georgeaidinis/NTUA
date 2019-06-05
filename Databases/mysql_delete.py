@@ -300,8 +300,8 @@ def delete_Publishers(Name = '', condition=''):
 
 
 
-def delete_Staff(StaffID = 0, condition = '')
-	if StaffID == '0'
+def delete_Staff(StaffID = 0, condition = ''):
+	if StaffID == '0':
 		StaffID = 0
 	if StaffID== 0 and condition=='':
 		query = "DELETE FROM Staff;"
@@ -355,7 +355,7 @@ def delete_Staff(StaffID = 0, condition = '')
 
 
 
-def delete_Copy(Books_ISBN = '', Number = 0, condition = '')
+def delete_Copy(Books_ISBN = '', Number = 0, condition = ''):
 	if Number == '0':
 		Number = 0
 
@@ -409,11 +409,11 @@ def delete_Copy(Books_ISBN = '', Number = 0, condition = '')
 
 	finally:
 		cursor.close()
-		conn.close()		
+		conn.close()
 
 
 def delete_Authored(Authors_AuthorID = 0, condition = ''):
-	if Authors_AuthorID == '0'
+	if Authors_AuthorID == '0':
 		Authors_AuthorID = 0
 	if Authors_AuthorID== 0 and condition=='':
 		query = "DELETE FROM Authored;"
@@ -517,11 +517,11 @@ def delete_Belongs(Books_ISBN = '', Category_Name = ''):
 
 	finally:
 		cursor.close()
-		conn.close()	
+		conn.close()
 
 
 def delete_Temporary(Staff_StaffID = 0,condition = ''):
-	if Staff_StaffID == '0'
+	if Staff_StaffID == '0':
 		Staff_StaffID = 0
 	if Staff_StaffID== 0 and condition=='':
 		query = "DELETE FROM Temporary;"
@@ -575,7 +575,7 @@ def delete_Temporary(Staff_StaffID = 0,condition = ''):
 
 
 def delete_Permanent(Staff_StaffID = 0,condition = ''):
-	if Staff_StaffID == '0'
+	if Staff_StaffID == '0':
 		Staff_StaffID = 0
 	if Staff_StaffID== 0 and condition=='':
 		query = "DELETE FROM Permanent;"
@@ -632,7 +632,7 @@ def delete_Borrows(MemberID = 0, Copy_Books_ISBN = '',Copy_Number = 0, condition
 		MemberID = 0
 	if Copy_Number == '0':
 		Copy_Number = 0
-	if MemberID== 0 and Copy_Books_ISBN =='' and Copy_Number == 0 condition=='':
+	if MemberID == 0 and Copy_Books_ISBN == '' and Copy_Number == 0 and condition == '':
 		query = "DELETE FROM Borrows;"
 		try:
 			db_config = read_db_config()
@@ -738,9 +738,9 @@ def delete_Category(Name = '', condition = ''):
 		conn.close()
 
 def delete_Reminds(Staff_StaffID = 0, Members_MemberID = 0, condition = ''):
-	if Staff_StaffID == '0'
+	if Staff_StaffID == '0':
 		Staff_StaffID = 0
-	if Members_MemberID == '0'
+	if Members_MemberID == '0':
 		Members_MemberID = 0
 
 	if Staff_StaffID== 0 and Members_MemberID== 0 and condition=='':
@@ -800,6 +800,6 @@ def delete_Reminds(Staff_StaffID = 0, Members_MemberID = 0, condition = ''):
 
 def main():
 	delete_Books(ISBN = "")
- 
+
 if __name__ == '__main__':
     main()
