@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <h1>Examples</h1>
+
+    <p> <i> Lets find something interesting</i></p>
+
+    <select name="forma" onchange="location = this.value;">
+     <option value="SELECT ACTION">Select action</option>
+
+     <option value="Query1">Query1</option>
+     <option value="Query2">Query2</option>
+     <option value="Query3">Query3</option>
+     <option value="Query4">Query4</option>
+     <option value="Query5">Query5</option>
+     <option value="Query6">Query6</option>
+     <option value="Query7">Query7</option>
+     <option value="Query8">Query8</option>
+     <option value="Query9">Query9</option>
+     <option value="Query10">Query10</option>
+     <option value="Query11">Query11</option>
+     <option value="Query12">Query12</option>
+    </select>
+
+    {% endblock %}
+  </body>
+</html>

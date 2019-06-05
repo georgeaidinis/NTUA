@@ -16,18 +16,8 @@ app.config['MYSQL_DB'] = db['mysql_db']
 
 mysql = MySQL(app)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        # Fetch form data
-        userDetails = request.form
-        name = userDetails['name']
-        email = userDetails['email']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)",(name, email))
-        mysql.connection.commit()
-        cur.close()
-        return redirect('/')
     return render_template('Home.html')
 
 @app.route("/View")
@@ -41,6 +31,10 @@ def RestrictedView():
 @app.route("/Edit")
 def Edit():
     return render_template("Edit.html")
+
+@app.route("/Examples")
+def Examples():
+    return render_template("Examples.html")
 
 @app.route("/InsertBooks",methods=['GET', 'POST'])
 def InsertBooks():
@@ -248,7 +242,6 @@ def restrictedCopies():
         return render_template("RestrictedCopies.html",userDetails=userDetails)
     return render_template("Error.html")
 
-
 @app.route("/RestrictedBooks")
 def restrictedBooks():
     cur = mysql.connection.cursor()
@@ -266,11 +259,9 @@ def Library():
 def Employees():
     return render_template("Employees.html")
 
-
 @app.route("/Error")
 def Error():
     return render_template("Error.html")
-
 
 if __name__ == '__main__':
     app.run(debug=True)
