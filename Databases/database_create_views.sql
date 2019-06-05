@@ -22,10 +22,10 @@ CREATE VIEW Authors_view AS
 -- -----------------------------------------------------
 
 CREATE VIEW Authored_view AS
-	select Authors.Name, Authors.Surname, Books.ISBN, Books.Title
+	select  Authors.Surname, Authors.Name, Books.ISBN, Books.Title
 	from  Authors, Books, Authored
 	where Authored.Authors_AuthorID = Authors.AuthorID and Authored.Books_ISBN = Books.ISBN
-	group by Authors.Surname, Authors.Name;
+	order by Authors.Surname;
 
 
 -- -----------------------------------------------------
