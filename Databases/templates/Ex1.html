@@ -1,0 +1,51 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+  <style>
+  table {
+      font-size: smaller;
+  }
+      tr:nth-child(even) {
+          background-color: #f2f2f2
+      }
+      tr:nth-child(odd) {
+          background-color: #aaaaaa
+      }
+  </style>
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <h1>Examples</h1>
+
+    <p> This query returns information about the Books and orders the Table by publication year </p>
+
+    <div style="overflow-x:auto;">
+    <table align="center">
+        <tr>
+        <th class="col1">ISBN</th>
+        <th class="col2">Title</th>
+        <th class="col3">AuthorName</th>
+        <th class="col4">AuthorSurname</th>
+        <th class="col5">Publication_Year</th>
+        </tr>
+      {% for user in userDetails %}
+        <tr>
+            <td> {{user[0]}} </td>
+            <td> {{user[1]}} </td>
+            <td> {{user[2]}} </td>
+            <td> {{user[3]}} </td>
+            <td> {{user[4]}} </td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+
+    <p> <i>Select Books_ISBN,Title,Name,Surname,Publication_year from Authored, Authors,Books where Authors.AuthorID = Authors_AuthorID and Books_ISBN = Books.ISBN order by Publication_year;</i></p>
+    {% endblock %}
+  </body>
+</html>

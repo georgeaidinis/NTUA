@@ -1,0 +1,43 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+  <style>
+  table {
+      font-size: smaller;
+  }
+      tr:nth-child(even) {
+          background-color: #f2f2f2
+      }
+      tr:nth-child(odd) {
+          background-color: #aaaaaa
+      }
+  </style>
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <h1>Examples</h1>
+
+    <p> This query returns all the Books titles from the specified Category </p>
+
+    <div style="overflow-x:auto;">
+    <table align="center">
+        <tr>
+        <th class="col1">Title</th>
+        </tr>
+      {% for user in userDetails %}
+        <tr>
+            <td> {{user[0]}} </td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+
+    <p> <i>select DISTINCT Title  from Belongs, Books , Category Where Category_Name = 'Comedy' and Books.ISBN = Belongs.Books_ISBN;</i></p>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <p>Lets Find all the books from a specific category</p>
+
+    <form form method="POST" action="">
+  <table>
+    <tr>
+      <td align="left">Category:</td>
+      <td align="left"><input type="text" name="Category" required/></td>
+    </tr>
+  </table>
+    <input type="submit">
+  </form>
+
+    {% endblock %}
+  </body>
+</html>

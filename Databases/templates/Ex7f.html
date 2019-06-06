@@ -1,0 +1,48 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+  <style>
+  table {
+      font-size: smaller;
+  }
+      tr:nth-child(even) {
+          background-color: #f2f2f2
+      }
+      tr:nth-child(odd) {
+          background-color: #aaaaaa
+      }
+  </style>
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <h1>Examples</h1>
+
+    <p> The people who have borrowed more than what you selected are</p>
+
+    <div style="overflow-x:auto;">
+    <table align="center">
+        <tr>
+        <th class="col1">Name</th>
+        <th class="col2">Number of Books Borrowed</th>
+        <th class="col3">MemberID</th>
+        </tr>
+      {% for user in userDetails %}
+        <tr>
+            <td> {{user[0]}} </td>
+            <td> {{user[1]}} </td>
+            <td> {{user[2]}} </td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+
+    <p> <i>select Name,num_books_borrowed,MemberID from Members , Borrows Where MemberID = Borrows.Members_MemberID group by num_books_borrowed , MemberID having num_books_borrowed >= "number";</i></p>
+
+    {% endblock %}
+  </body>
+</html>

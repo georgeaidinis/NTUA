@@ -1,0 +1,48 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+  <style>
+  table {
+      font-size: smaller;
+  }
+      tr:nth-child(even) {
+          background-color: #f2f2f2
+      }
+      tr:nth-child(odd) {
+          background-color: #aaaaaa
+      }
+  </style>
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <h1>Examples</h1>
+
+    <p> This query returns information about the number of copies that are currently borrowed </p>
+
+    <div style="overflow-x:auto;">
+    <table align="center">
+        <tr>
+        <th class="col1">ISBN</th>
+        <th class="col2">Title</th>
+        <th class="col3">Total</th>
+        </tr>
+      {% for user in userDetails %}
+        <tr>
+            <td> {{user[0]}} </td>
+            <td> {{user[1]}} </td>
+            <td> {{user[2]}} </td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+
+    <p> <i>select ISBN,Title,Total from Books,(select Copy_Books_ISBN,count(*) as Total from Borrows group by Copy_Books_ISBN) NEW WHERE ISBN = NEW.Copy_Books_ISBN;</i></p>
+
+    {% endblock %}
+  </body>
+</html>

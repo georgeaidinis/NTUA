@@ -161,6 +161,9 @@ def Authors():
     resultValue = cur.execute("SELECT * FROM Authors")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("Authors.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -170,6 +173,9 @@ def Publishers():
     resultValue = cur.execute("SELECT * FROM Publishers")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("Publishers.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -182,6 +188,9 @@ def Copies():
     GROUP BY Books.ISBN""")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("Copies.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -191,6 +200,9 @@ def Members():
     resultValue = cur.execute("SELECT * FROM Members")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("Members.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -200,6 +212,9 @@ def RestrictedMembers():
     resultValue = cur.execute("SELECT * FROM Members_view")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("RestrictedMembers.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -209,6 +224,9 @@ def Books():
     resultValue = cur.execute("SELECT * FROM Books")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("Books.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -218,6 +236,9 @@ def restrictedAuthors():
     resultValue = cur.execute("SELECT * FROM Authors_view")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("RestrictedAuthors.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -227,6 +248,9 @@ def restrictedPublishers():
     resultValue = cur.execute("SELECT * FROM Publishers_view")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("RestrictedPublishers.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -239,6 +263,9 @@ def restrictedCopies():
     GROUP BY Books_view.ISBN""")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("RestrictedCopies.html",userDetails=userDetails)
     return render_template("Error.html")
 
@@ -248,12 +275,178 @@ def restrictedBooks():
     resultValue = cur.execute("SELECT * FROM Books_view")
     if resultValue > 0:
         userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
         return render_template("RestrictedBooks.html",userDetails=userDetails)
     return render_template("Error.html")
 
-@app.route("/Library")
-def Library():
-    return render_template("Library.html")
+@app.route("/Query1")
+def Ex1():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("Select Books_ISBN,Title,Name,Surname,Publication_year from Authored, Authors,Books where Authors.AuthorID = Authors_AuthorID and Books_ISBN = Books.ISBN order by Publication_year;")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Ex1.html",userDetails=userDetails)
+    return render_template("Error.html")
+
+@app.route("/Query2",methods=['GET', 'POST'])
+def Ex2():
+    if request.method == 'POST':
+        # Fetch form data
+        CategoryDetails = request.form
+        Category = CategoryDetails['Category']
+        cur = mysql.connection.cursor()
+        a = "select DISTINCT Title  from Belongs, Books , Category Where Category_Name = '"
+        a += Category
+        a += "' and Books.ISBN = Belongs.Books_ISBN;"
+        resultValue = cur.execute(a)
+        if resultValue > 0:
+            userDetails = cur.fetchall()
+        if cur.rowcount == 0 :
+            return render_template("Error.html")
+        else:
+            return render_template("Ex2f.html",userDetails=userDetails)
+    return render_template("Ex2.html")
+
+@app.route("/Query3")
+def Ex3():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("select ISBN,Title,Total from Books,(select Copy_Books_ISBN,count(*) as Total from Borrows group by Copy_Books_ISBN) NEW WHERE ISBN = NEW.Copy_Books_ISBN;")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Ex3.html",userDetails=userDetails)
+    return render_template("Error.html")
+
+@app.route("/Query4")
+def Ex4():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT Books.ISBN,Books.Title,count(Copy.Number) FROM Copy , Books WHERE Copy.Books_ISBN = Books.ISBN GROUP BY Books.ISBN;")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Ex4.html",userDetails=userDetails)
+    return render_template("Error.html")
+
+@app.route("/Query5")
+def Ex5():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("select Distinct Name,Surname,Birthdate from Authors where Birthdate > (select avg(Birthdate) from Authors) order by Birthdate DESC;")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Ex5.html",userDetails=userDetails)
+    return render_template("Error.html")
+
+@app.route("/Query6")
+def Ex6():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("select distinct ISBN,Title,Name from Books join Publishers on Name=Publishers_Name ORDER by Name;")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Ex6.html",userDetails=userDetails)
+    return render_template("Error.html")
+
+@app.route("/Query7",methods=['GET', 'POST'])
+def Ex7():
+    if request.method == 'POST':
+        # Fetch form data
+        NumberDetails = request.form
+        Number = NumberDetails['Number']
+        cur = mysql.connection.cursor()
+        a = "select Name,num_books_borrowed,MemberID from Members , Borrows Where MemberID = Borrows.Members_MemberID group by num_books_borrowed , MemberID having num_books_borrowed >= "
+        a += Number
+        a += ";"
+        resultValue = cur.execute(a)
+        print(a)
+        if resultValue > 0:
+            NumberDetails = cur.fetchall()
+        if cur.rowcount == 0 :
+            return render_template("Error.html")
+        return render_template("Ex7f.html",userDetails=NumberDetails)
+    return render_template("Ex7.html")
+
+@app.route("/Query8")
+def Ex8():
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("Select New.Name , New.Surname,count(Old.ISBN) AS Counter from (Select* from Authors join Authored on AuthorID=Authors_AuthorID) New ,(select ISBN from Books join Borrows on Copy_Books_ISBN = ISBN) Old WHERE Old.ISBN = New.Books_ISBN GROUP BY New.Name,New.Surname ORDER BY Counter DESC LIMIT 5;")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Ex8.html",userDetails=userDetails)
+    return render_template("Error.html")
+
+@app.route("/Query9",methods=['GET', 'POST'])
+def Ex9():
+    if request.method == 'POST':
+        # Fetch form data
+        NumberDetails = request.form
+        Title = NumberDetails['Title']
+        cur = mysql.connection.cursor()
+        a = "Select ISBN,Title from Books where Title like '%"
+        a += Title
+        a += "%';"
+        resultValue = cur.execute(a)
+        print(a)
+        if resultValue > 0:
+            NumberDetails = cur.fetchall()
+        if cur.rowcount == 0 :
+            return render_template("Error.html")
+        return render_template("Ex9f.html",userDetails=NumberDetails)
+    return render_template("Ex9.html")
+
+@app.route("/Query10",methods=['GET', 'POST'])
+def Ex10():
+    if request.method == 'POST':
+        # Fetch form data
+        NumberDetails = request.form
+        Surname = NumberDetails['Surname']
+        cur = mysql.connection.cursor()
+        a = "Select Name,Surname from Authors where Surname like '%"
+        a += Surname
+        a += "%';"
+        resultValue = cur.execute(a)
+        print(a)
+        if resultValue > 0:
+            NumberDetails = cur.fetchall()
+        if cur.rowcount == 0 :
+            return render_template("Error.html")
+        return render_template("Ex10f.html",userDetails=NumberDetails)
+    return render_template("Ex10.html")
+
+@app.route("/Query11",methods=['GET', 'POST'])
+def Ex11():
+    if request.method == 'POST':
+        # Fetch form data
+        NumberDetails = request.form
+        Name = NumberDetails['Name']
+        cur = mysql.connection.cursor()
+        a = "Select Name,Address from Publishers where Name like '%"
+        a += Name
+        a += "%';"
+        resultValue = cur.execute(a)
+        print(a)
+        if resultValue > 0:
+            NumberDetails = cur.fetchall()
+        if cur.rowcount == 0 :
+            return render_template("Error.html")
+        return render_template("Ex11f.html",userDetails=NumberDetails)
+    return render_template("Ex11.html")
 
 @app.route("/Employees")
 def Employees():
