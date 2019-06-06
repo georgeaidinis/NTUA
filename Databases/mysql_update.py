@@ -6,23 +6,23 @@ from split import div_first_last
 
 
 
-"""
-Contents:
+	"""
+	Contents:
 
-1)	update_book
-2)	update_Library
-3)	update_Author
-4)	update_Member
-5)	update_Publisher
-6)	update_Staff
-7)	update_Copy
-8)	update_Authored
-9)	update_Belongs
-10)	update_Temporary
-11)	update_Permanent
-12)	update_Borrows
-13)	update_Category
-14)	update_Reminds
+	1)	update_book
+	2)	update_Library
+	3)	update_Author
+	4)	update_Member
+	5)	update_Publisher
+	6)	update_Staff
+	7)	update_Copy
+	8)	update_Authored
+	9)	update_Belongs
+	10)	update_Temporary
+	11)	update_Permanent
+	12)	update_Borrows
+	13)	update_Category
+	14)	update_Reminds
 
 
 
