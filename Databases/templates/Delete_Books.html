@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <title>Db Project</title>
   </head>
+  <style>
 
+  table {
+      font-size: smaller;
+
+  }
+  </style>
 
   <body>
     {% extends "Template.html" %}
@@ -19,6 +25,35 @@
   </table>
     <input type="submit">
   </form>
+
+  <p> </p>
+  <div style="overflow-x:auto;">
+  <table align="center">
+      <tr>
+      <th class="col1">ISBN</th>
+      <th class="col2">Title</th>
+      <th class="col3">Pages</th>
+      <th class="col4">Publication_Year</th>
+      <th class="col5">Publishers_Name</th>
+      <th class="col6">LibraryName</th>
+      <th class="col7">AuthorName</th>
+      <th class="col7">AuthorSurname</th>
+      </tr>
+    {% for user in userDetails %}
+      <tr>
+          <td> {{user[0]}} </td>
+          <td> {{user[1]}} </td>
+          <td> {{user[2]}} </td>
+          <td> {{user[3]}} </td>
+          <td> {{user[4]}} </td>
+          <td> {{user[5]}} </td>
+          <td> {{user[6]}} </td>
+          <td> {{user[7]}} </td>
+          <td> {{user[8]}} </td>
+      </tr>
+      {% endfor %}
+    </table>
+    </div>
 
     {% endblock %}
   </body>

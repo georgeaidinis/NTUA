@@ -90,7 +90,15 @@ def UpdateBooks():
         Author = BookDetails['Author']
         mysql_update.update_books(New_ISBN,Title,Pages,Publication_Year,Publishers_Name,'',Author,Old_ISBN,'')
         return redirect('/Books')
-    return render_template("Update_Books.html")
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM Books")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Update_Books.html",userDetails=userDetails)
+    return render_template("Error.html")
 
 @app.route("/UpdatePublishers",methods=['GET', 'POST'])
 def UpdatePublishers():
@@ -103,7 +111,15 @@ def UpdatePublishers():
         New_name = PublisherDetails['New Name']
         mysql_update.update_publishers(New_name,Date_of_Establishment,Address,Name,'')
         return redirect('/Publishers')
-    return render_template("Update_Publishers.html")
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM Publishers")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Update_Publishers.html",userDetails=userDetails)
+    return render_template("Error.html")
 
 @app.route("/UpdateMembers",methods=['GET', 'POST'])
 def UpdateMembers():
@@ -119,7 +135,15 @@ def UpdateMembers():
         Surname = MemberDetails['Surname']
         mysql_update.update_members(MemberID,Name,Surname,Address,Number_of_Borrowed_Books,Birthdate,Can_Borrow,'NTUA',MemberID,'')
         return redirect('/Members')
-    return render_template("Update_Members.html")
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM Members")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Update_Members.html",userDetails=userDetails)
+    return render_template("Error.html")
 
 @app.route("/DeleteBooks",methods=['GET', 'POST'])
 def DeleteBooks():
@@ -129,7 +153,15 @@ def DeleteBooks():
         ISBN = BookDetails['ISBN']
         mysql_delete.delete_Books(ISBN,'')
         return redirect('/Books')
-    return render_template("Delete_Books.html")
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM Books")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Delete_Books.html",userDetails=userDetails)
+    return render_template("Error.html")
 
 @app.route("/DeletePublishers",methods=['GET', 'POST'])
 def DeletePublishers():
@@ -139,7 +171,15 @@ def DeletePublishers():
         Name = PublisherDetails['Name']
         mysql_delete.delete_Publishers(Name,'')
         return redirect('/Publishers')
-    return render_template("Delete_Publishers.html")
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM Publishers")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Delete_Publishers.html",userDetails=userDetails)
+    return render_template("Error.html")
 
 @app.route("/DeleteMembers",methods=['GET', 'POST'])
 def DeleteMembers():
@@ -149,8 +189,16 @@ def DeleteMembers():
         MembersID = MemberDetails['MembersID']
         mysql_delete.delete_Members(MembersID,'')
         return redirect('/Members')
-    return render_template("Delete_Members.html")
-
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT * FROM Members")
+    if resultValue > 0:
+        userDetails = cur.fetchall()
+    if cur.rowcount == 0 :
+        return render_template("Error.html")
+    else:
+        return render_template("Delete_Members.html",userDetails=userDetails)
+    return render_template("Error.html")
+    
 @app.route("/About")
 def About():
     return render_template("About.html")

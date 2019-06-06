@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <title>Db Project</title>
   </head>
+  <style>
+  table {
+      font-size: smaller;
+
+  }
+  </style>
   <body>
     {% extends "Template.html" %}
     {% block content %}
@@ -32,6 +38,25 @@
          </table>
          <input type="submit">
      </form>
+
+     <p> </p>
+     <div style="overflow-x:auto;">
+     <table align="center">
+         <tr>
+         <th class="col1">Name</th>
+         <th class="col2">Address</th>
+         <th class="col3">Date of Establishment</th>
+         </tr>
+       {% for user in userDetails %}
+         <tr>
+             <td> {{user[0]}} </td>
+             <td> {{user[1]}} </td>
+             <td> {{user[2]}} </td>
+         </tr>
+         {% endfor %}
+       </table>
+       </div>
+
     {% endblock %}
   </body>
 </html>
