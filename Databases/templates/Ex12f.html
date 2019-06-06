@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Db Project</title>
+  </head>
+
+
+  <body>
+    {% extends "Template.html" %}
+    {% block content %}
+
+    <p>Try to borrow a book</p>
+
+    <form form method="POST" action="">
+  <table>
+    <tr>
+      <td align="left">Members_MemberID:</td>
+      <td align="left"><input type="text" name="Members_MemberID" required/></td>
+    </tr>
+    <tr>
+      <td align="left">Copy_Number:</td>
+      <td align="left"><input type="number" name="Copy_Number" required/></td>
+    </tr>
+    <tr>
+      <td align="left">Copy_Books_ISBN:</td>
+      <td align="left"><input type="text" name="Copy_Books_ISBN" required/></td>
+    </tr>
+    <tr>
+      <td align="left">Start_Date:</td>
+      <td align="left"><input type="text" name="Start_Date" value=''/></td>
+    </tr>
+    <tr>
+      <td align="left">Return_date:</td>
+      <td align="left"><input type="text" name="Return_date" value=''/></td>
+    </tr>
+    <tr>
+      <td align="left">Due_Date:</td>
+      <td align="left"><input type="text" name="Due_Date" value=''/></td>
+    </tr>
+  </table>
+    <input type="submit">
+  </form>
+
+    {% endblock %}
+  </body>
+</html>

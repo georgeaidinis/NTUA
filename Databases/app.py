@@ -198,7 +198,7 @@ def DeleteMembers():
     else:
         return render_template("Delete_Members.html",userDetails=userDetails)
     return render_template("Error.html")
-    
+
 @app.route("/About")
 def About():
     return render_template("About.html")
@@ -495,6 +495,29 @@ def Ex11():
             return render_template("Error.html")
         return render_template("Ex11f.html",userDetails=NumberDetails)
     return render_template("Ex11.html")
+
+@app.route("/Query12",methods=['GET', 'POST'])
+def Ex12():
+    if request.method == 'POST':
+        # Fetch form data
+        NumberDetails = request.form
+        Members_MemberID = NumberDetails['Members_MemberID']
+        Copy_Number = NumberDetails['Copy_Number']
+        Copy_Books_ISBN = NumberDetails['Copy_Books_ISBN']
+        Start_Date = NumberDetails['Start_Date']
+        Return_date = NumberDetails['Return_date']
+        Due_Date = NumberDetails['Due_Date']
+        mysql_insert.insert_Borrows(Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date, Return_date, Due_Date)
+        cur = mysql.connection.cursor()
+        resultValue = cur.execute("SELECT * FROM Borrows")
+        if resultValue > 0:
+            userDetails = cur.fetchall()
+        if cur.rowcount == 0 :
+            return render_template("Error.html")
+        else:
+            return render_template("Ex12.html",userDetails=userDetails)
+        return render_template("Error.html")
+    return render_template("Ex12f.html")
 
 @app.route("/Employees")
 def Employees():
