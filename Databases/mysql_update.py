@@ -146,7 +146,7 @@ def update_books (ISBN = '', Title = '', Pages = 0, Publication_Year = 0, Publis
 		j = j-1
 
 	if ISBN_KEY!= '' or  condition!='':
-		List += "Where "
+		List += " Where "
 		if ISBN_KEY != '':
 			List += " ISBN = '"
 			List += ISBN_KEY
@@ -203,7 +203,7 @@ def update_library (LibraryName):
 
 def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', AuthorID_KEY=0, condition=''):
 	coma_counter = [0]*4
-	attribute_list = ["AuthorID = ", "Name = '", "Surname = '", "Birhtdate = '"]
+	attribute_list = ["AuthorID = ", "Name = '", "Surname = '", "Birthdate = '"]
 	i = 0
 
 	if AuthorID != 0:
@@ -256,11 +256,11 @@ def update_authors(AuthorID = 0, Name = '', Surname = '', Birthdate = '', Author
 		j = j-1
 	elif Birthdate != '' and j==1:
 		List += attribute_list[3]
-		List += bi
+		List += Birthdate
 		List += "'"
 
 	if AuthorID_KEY!= 0 or  condition!='':
-		List += "Where "
+		List += " Where "
 		if AuthorID_KEY != 0:
 			List += "AuthorID = '"
 			List += AuthorID_KEY
@@ -399,7 +399,7 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 		List += "'"
 
 	if MemberID!= 0 or  condition!='':
-		List += "Where "
+		List += " Where "
 		if MemberID != '':
 			List += "MemberID = '"
 			List += MemberID
@@ -407,7 +407,7 @@ def update_members(MemberID=0,Name='',Surname='',Address='',num_books_borrowed=-
 		else:
 			List += condition
 	List += ";"
-	print(List)
+
 	query = ''.join(List)
 	try:
 		db_config = read_db_config()
@@ -481,7 +481,7 @@ def update_publishers(Name='', Date_of_Establishment='', Address='',Name_KEY='',
 		List += "'"
 
 	if  Name_KEY != '' or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Name_KEY != '':
 			List += "Name = '"
 			List += Name_KEY
@@ -539,12 +539,12 @@ def update_Staff(StaffID = 0,Name = '',Pay = 0,Surname = '',LibraryName = '', St
 
 	if StaffID != 0 and j!=1:
 		List += attribute_list[0]
-		List += StaffID
+		List += str(StaffID)
 		List += ","
 		j = j-1
 	elif StaffID != 0 and j==1:
 		List += attribute_list[0]
-		List += StaffID
+		List += str(StaffID)
 		List += ""
 
 
@@ -561,12 +561,12 @@ def update_Staff(StaffID = 0,Name = '',Pay = 0,Surname = '',LibraryName = '', St
 
 	if Pay != 0 and j!=1:
 		List += attribute_list[2]
-		List += Pay
+		List += str(Pay)
 		List += ","
 		j = j-1
 	elif Pay != 0 and j==1:
 		List += attribute_list[2]
-		List += Pay
+		List += str(Pay)
 		List += ""
 
 
@@ -592,10 +592,10 @@ def update_Staff(StaffID = 0,Name = '',Pay = 0,Surname = '',LibraryName = '', St
 		List += "'"
 
 	if  StaffID_KEY != 0 or  condition!='':
-		List += "Where "
+		List += " Where "
 		if StaffID_KEY != '':
 			List += "StaffID = "
-			List += StaffID_KEY
+			List += str(StaffID_KEY)
 			List += ""
 		else:
 			List += condition
@@ -648,12 +648,12 @@ def update_Copy(Number = 0, Books_ISBN = '', Position = '', Number_KEY = 0, Book
 
 	if Number != 0 and j!=1:
 		List += attribute_list[0]
-		List += Number
+		List += str(Number)
 		List += ","
 		j = j-1
 	elif Number != 0 and j==1:
 		List += attribute_list[0]
-		List += Number
+		List += str(Number)
 		List += ""
 
 
@@ -679,10 +679,10 @@ def update_Copy(Number = 0, Books_ISBN = '', Position = '', Number_KEY = 0, Book
 
 
 	if  (Number_KEY != 0 and Books_ISBN_KEY!='') or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Number_KEY != 0 and Books_ISBN_KEY!='':
 			List += "Number = "
-			List += Number_KEY
+			List += str(Number_KEY)
 			List += ", Books_ISBN = '"
 			List += Books_ISBN_KEY
 			List += "'"
@@ -750,7 +750,7 @@ def update_Authored(Authors_AuthorID = 0, Books_ISBN = '', Authors_AuthorID_KEY 
 		List += "'"
 
 	if  (Authors_AuthorID_KEY != 0 and Books_ISBN_KEY!='') or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Authors_AuthorID_KEY != 0 and Books_ISBN_KEY!='':
 			List += "Authors_AuthorID = "
 			List += Authors_AuthorID_KEY
@@ -821,7 +821,7 @@ def update_Belongs(Books_ISBN = '', Category_Name = '', Books_ISBN_KEY = '', Cat
 
 
 	if  (Books_ISBN_KEY != '' and Category_Name_KEY!='') or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Books_ISBN_KEY != '' and Category_Name_KEY!='':
 			List += "Books_ISBN = '"
 			List += Books_ISBN_KEY
@@ -882,30 +882,30 @@ def update_Temporary(Staff_StaffID = 0, ContractID = 0, Staff_StaffID_KEY = 0, c
 
 	if Staff_StaffID != 0 and j!=1:
 		List += attribute_list[0]
-		List += Staff_StaffID
+		List += str(Staff_StaffID)
 		List += ","
 		j = j-1
 	elif Staff_StaffID != 0 and j==1:
 		List += attribute_list[0]
-		List += Staff_StaffID
+		List += str(Staff_StaffID)
 		List += ""
 
 
 	if ContractID != 0 and j!=1:
 		List += attribute_list[1]
-		List += ContractID
+		List += str(ContractID)
 		List += ","
 		j = j-1
 	elif ContractID != 0 and j==1:
 		List += attribute_list[1]
-		List += ContractID
+		List += str(ContractID)
 		List += ""
 
 	if  Staff_StaffID_KEY != 0 or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Staff_StaffID_KEY != 0:
 			List += "Staff_StaffID = "
-			List += Staff_StaffID_KEY
+			List += str(Staff_StaffID_KEY)
 			List += ""
 		else:
 			List += condition
@@ -955,12 +955,12 @@ def update_Permanent(Staff_StaffID = 0, Hiring_Date = '', Staff_StaffID_KEY = 0,
 
 	if Staff_StaffID != 0 and j!=1:
 		List += attribute_list[0]
-		List += Staff_StaffID
+		List += str(Staff_StaffID)
 		List += ","
 		j = j-1
 	elif Staff_StaffID != 0 and j==1:
 		List += attribute_list[0]
-		List += Staff_StaffID
+		List += str(Staff_StaffID)
 		List += ""
 
 
@@ -975,10 +975,10 @@ def update_Permanent(Staff_StaffID = 0, Hiring_Date = '', Staff_StaffID_KEY = 0,
 		List += "'"
 
 	if  Staff_StaffID_KEY  or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Staff_StaffID_KEY != 0:
 			List += "Staff_StaffID = "
-			List += Authors_AuthorID_KEY
+			List += str(Staff_StaffID_KEY)
 			List += ""
 		else:
 			List += condition
@@ -1101,7 +1101,7 @@ def update_Borrows(Members_MemberID = 0, Copy_Number = 0, Copy_Books_ISBN = '', 
 
 
 	if  (Members_MemberID_KEY != 0 and Copy_Number_KEY!=0 and Copy_Books_ISBN_KEY!='') or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Members_MemberID_KEY != 0 and Copy_Number_KEY!=0 and Copy_Books_ISBN_KEY!='':
 			List += "Members_MemberID = "
 			List += Members_MemberID_KEY
@@ -1175,7 +1175,7 @@ def update_Category(Name ='', Parent_category = '', Name_KEY = '', condition = '
 
 
 	if  Name_KEY != '' or  condition!='':
-		List += "Where "
+		List += " Where "
 		if Name_KEY != '':
 			List += "Name = '"
 			List += Name_KEY
@@ -1260,7 +1260,7 @@ def update_Reminds(Staff_StaffID = 0, Members_MemberID = 0, Date_of_Reminder = '
 		List += "'"
 
 	if  (Staff_StaffID_KEY != 0 and Members_MemberID_KEY!=0) or  condition!='':
-		List += "Where "
+		List += " Where "
 		if (Staff_StaffID_KEY != 0 and Members_MemberID_KEY!=0):
 			List += "Staff_StaffID = "
 			List += Staff_StaffID_KEY
@@ -1294,7 +1294,7 @@ def update_Reminds(Staff_StaffID = 0, Members_MemberID = 0, Date_of_Reminder = '
 
 
 def main():
-	return
+	update_Permanent(Staff_StaffID = 234, Hiring_Date = '', Staff_StaffID_KEY = 1, condition = '')
 
 if __name__ == '__main__':
     main()
