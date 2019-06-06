@@ -1,0 +1,666 @@
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+1062 (23000): Duplicate entry '978-960-9400-06-0' for key 'PRIMARY'
+1062 (23000): Duplicate entry '978-618-5066-11-6' for key 'PRIMARY'
+last insert id not found
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+done
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+1406 (22001): Data too long for column 'Position' at row 1
+1406 (22001): Data too long for column 'Position' at row 1
+1406 (22001): Data too long for column 'Position' at row 1
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+last insert id not found
+last insert id not found
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+last insert id not found
+1062 (23000): Duplicate entry '978-960-9400-06-0-1' for key 'PRIMARY'
+1062 (23000): Duplicate entry '978-618-5066-11-6-1' for key 'PRIMARY'
+1062 (23000): Duplicate entry '978-618-5066-11-6-2' for key 'PRIMARY'
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`database`.`Copy`, CONSTRAINT `fk_Copy_Books1` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE)
+last insert id not found
+done
+done
+done
+done
+done
+done
+done
+done
+done
+triggers ok

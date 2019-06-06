@@ -183,3 +183,28 @@ begin
 
 end$$
 delimiter ;
+
+-- --11. one cannot borrow a copy that is already borrowed and not returned
+delimiter $$
+create trigger copy_is_avail
+	before insert on Borrows for each row
+begin
+	if exists (select * from Borrows where Borrows.Copy_Books_ISBN = new.Copy_Books_ISBN 
+    and Borrows.Copy_Number = new.Copy_Number 
+    and Borrows.Return_date is null) then
+		insert into myerror(T)
+        values(null);
+	end if;
+end$$
+delimiter ;
+
+-- --12. before inserting borrowing, check user is allowed to
+delimiter $$
+create trigger check_user_can_borrow
+	before insert on Borrows for each row
+begin
+	if exists(select * from Members.Can_Borrow = false and Members.MemberID = new.Members_MemberID)
+		insert into myerror(T)
+		values(null);
+	end if;
+end$$
