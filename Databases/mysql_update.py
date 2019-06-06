@@ -683,13 +683,13 @@ def update_Copy(Number = 0, Books_ISBN = '', Position = '', Number_KEY = 0, Book
 		if Number_KEY != 0 and Books_ISBN_KEY!='':
 			List += "Number = "
 			List += str(Number_KEY)
-			List += ", Books_ISBN = '"
+			List += " and Books_ISBN = '"
 			List += Books_ISBN_KEY
 			List += "'"
 		else:
 			List += condition
 	List += ";"
-
+	print(List)
 	query = ''.join(List)
 	try:
 		db_config = read_db_config()
@@ -1035,23 +1035,23 @@ def update_Borrows(Members_MemberID = 0, Copy_Number = 0, Copy_Books_ISBN = '', 
 
 	if Members_MemberID != 0 and j!=1:
 		List += attribute_list[0]
-		List += Members_MemberID
+		List += str(Members_MemberID)
 		List += ","
 		j = j-1
 	elif Members_MemberID != 0 and j==1:
 		List += attribute_list[0]
-		List += Members_MemberID
+		List += str(Members_MemberID)
 		List += ""
 
 
 	if Copy_Number != 0 and j!=1:
 		List += attribute_list[1]
-		List += Copy_Number
+		List += str(Copy_Number)
 		List += ","
 		j = j-1
 	elif Copy_Number != 0 and j==1:
 		List += attribute_list[1]
-		List += Copy_Number
+		List += str(Copy_Number)
 		List += ""
 
 
@@ -1104,16 +1104,16 @@ def update_Borrows(Members_MemberID = 0, Copy_Number = 0, Copy_Books_ISBN = '', 
 		List += " Where "
 		if Members_MemberID_KEY != 0 and Copy_Number_KEY!=0 and Copy_Books_ISBN_KEY!='':
 			List += "Members_MemberID = "
-			List += Members_MemberID_KEY
-			List += ", Copy_Number = "
-			List += Copy_Number_KEY
-			List += ", Copy_Books_ISBN = '"
+			List += str(Members_MemberID_KEY)
+			List += " and Copy_Number = "
+			List += str(Copy_Number_KEY)
+			List += " and Copy_Books_ISBN = '"
 			List += Copy_Books_ISBN_KEY
 			List += "'"
 		else:
 			List += condition
 	List += ";"
-
+	print(List)
 	query = ''.join(List)
 	try:
 		db_config = read_db_config()
@@ -1229,23 +1229,23 @@ def update_Reminds(Staff_StaffID = 0, Members_MemberID = 0, Date_of_Reminder = '
 
 	if Staff_StaffID != 0 and j!=1:
 		List += attribute_list[0]
-		List += Staff_StaffID
+		List += str(Staff_StaffID)
 		List += ","
 		j = j-1
 	elif Staff_StaffID != 0 and j==1:
 		List += attribute_list[0]
-		List += Staff_StaffID
+		List += str(Staff_StaffID)
 		List += ""
 
 
 	if Members_MemberID != 0 and j!=1:
 		List += attribute_list[1]
-		List += Members_MemberID
+		List += str(Members_MemberID)
 		List += ","
 		j = j-1
 	elif Members_MemberID != 0 and j==1:
 		List += attribute_list[1]
-		List += Members_MemberID
+		List += str(Members_MemberID)
 		List += ""
 
 
@@ -1263,14 +1263,14 @@ def update_Reminds(Staff_StaffID = 0, Members_MemberID = 0, Date_of_Reminder = '
 		List += " Where "
 		if (Staff_StaffID_KEY != 0 and Members_MemberID_KEY!=0):
 			List += "Staff_StaffID = "
-			List += Staff_StaffID_KEY
-			List += ", Members_MemberID = "
-			List += Members_MemberID_KEY
+			List += str(Staff_StaffID_KEY)
+			List += " and Members_MemberID = "
+			List += str(Members_MemberID_KEY)
 			List += ""
 		else:
 			List += condition
 	List += ";"
-
+	print(List)
 	query = ''.join(List)
 	try:
 		db_config = read_db_config()
@@ -1294,7 +1294,7 @@ def update_Reminds(Staff_StaffID = 0, Members_MemberID = 0, Date_of_Reminder = '
 
 
 def main():
-	update_Permanent(Staff_StaffID = 234, Hiring_Date = '', Staff_StaffID_KEY = 1, condition = '')
+	return
 
 if __name__ == '__main__':
     main()
