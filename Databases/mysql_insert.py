@@ -379,8 +379,8 @@ def insert_Permanent(Staff_StaffID, Hiring_Date):
 		conn.close()
 
 def insert_Borrows(Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date, Return_Date, Due_Date):
-	query = "INSERT INTO Borrows VALUES (%s,%s,%s,%s,%s,%s)"
-	args = (Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date, Return_Date, Due_Date)
+	query = "INSERT INTO Borrows VALUES (%s,%s,%s,%s,NULL,%s)"
+	args = (Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date,  Due_Date)
 	try:
 		db_config = read_db_config()
 		conn = MySQLConnection(**db_config)

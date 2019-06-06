@@ -47,7 +47,7 @@ begin
 	-- -- --
     -- -- if new val of num_books_borrowed = 5, change Can_Borrow to false
     -- -- --
-    elseif ( (select num_books_borrowed from Members where Members.MemberID = new.Members_MemberID ) > 4 or exists (select * from Members where Members.MembersID = new.Members_MemberID and Members.Can_Borrow = False)) then
+    elseif ( (select num_books_borrowed from Members where Members.MemberID = new.Members_MemberID ) > 4 or exists (select * from Members where Members.MemberID = new.Members_MemberID and Members.Can_Borrow = False)) then
 		insert into myerror(T)
 			values(null);
 	else 
@@ -203,8 +203,9 @@ delimiter $$
 create trigger check_user_can_borrow
 	before insert on Borrows for each row
 begin
-	if exists(select * from Members.Can_Borrow = false and Members.MemberID = new.Members_MemberID)
+	if exists(select * from Members where Members.Can_Borrow = 0 and Members.MemberID = new.Members_MemberID) then
 		insert into myerror(T)
 		values(null);
 	end if;
 end$$
+delimiter ;

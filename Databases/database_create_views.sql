@@ -44,6 +44,6 @@ CREATE VIEW Publishers_view AS
 	select *
 	from Publishers;
 
-CREATE VIEW Copies_view AS
+CREATE VIEW Copy_view AS
 	select *
 	from Copy;

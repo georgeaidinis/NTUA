@@ -505,9 +505,8 @@ def Ex12():
         Copy_Number = NumberDetails['Copy_Number']
         Copy_Books_ISBN = NumberDetails['Copy_Books_ISBN']
         Start_Date = NumberDetails['Start_Date']
-        Return_date = NumberDetails['Return_date']
         Due_Date = NumberDetails['Due_Date']
-        mysql_insert.insert_Borrows(Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date, Return_date, Due_Date)
+        mysql_insert.insert_Borrows(Members_MemberID, Copy_Number, Copy_Books_ISBN, Start_Date, '', Due_Date)
         cur = mysql.connection.cursor()
         resultValue = cur.execute("SELECT * FROM Borrows")
         if resultValue > 0:
