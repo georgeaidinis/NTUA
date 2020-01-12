@@ -22,17 +22,23 @@ class BaselineDNN(nn.Module):
                 the embedding layer
         """
 
+
+#############################################################################
+# Question 4
+#############################################################################
+# Creating the Embedding Layer
+
         super(BaselineDNN, self).__init__()
         #from the embeddings array given to us by the load_word_vectors function
         num_embeddings, emb_dim = embeddings.shape 
-        print(emb_dim)
         # 1 - define the embedding layer
         self.embedding = nn.Embedding(num_embeddings=num_embeddings, embedding_dim=emb_dim)  # EX4
 
         # 2 - initialize the weights of our Embedding layer
         # from the pretrained word embeddings
 
-        #This will be done it the line just below, it's the arg torch.from_numpy(embeddings).
+        #This is done in the line just below, it's the arg torch.from_numpy(embeddings).
+
         #self.embedding.weight.data.copy_(torch.from_numpy(embeddings))  # EX4
 
         # 3 - define if the embedding layer will be frozen or finetuned
@@ -56,15 +62,15 @@ class BaselineDNN(nn.Module):
         """
 
         # 1 - embed the words, using the embedding layer
-        embeddings = ...  # EX6
+        embeddings = self.embedding  # EX6
 
         # 2 - construct a sentence representation out of the word embeddings
-        representations = ...  # EX6
+        representations = self.mean_pooling(embeddings, lengths)  # EX6
 
         # 3 - transform the representations to new ones.
-        representations = ...  # EX6
+        representations = self.non_linearity1(representations)  # EX6
 
         # 4 - project the representations to classes using a linear layer
-        logits = ...  # EX6
+        logits = self.classifier(representations)  # EX6
 
         return logits
