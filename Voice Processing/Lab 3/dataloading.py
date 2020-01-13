@@ -1,5 +1,7 @@
 from torch.utils.data import Dataset
 from tqdm import tqdm
+import numpy
+from nltk.tokenize import TweetTokenizer
 
 
 class SentenceDataset(Dataset):
@@ -37,7 +39,7 @@ class SentenceDataset(Dataset):
 
         # EX2
         #Twitter-aware tokenizer, designed to be flexible and easy to adapt to new domains and tasks.
-        from nltk.tokenize import TweetTokenizer
+ 
 
         #Remove Twitter username handles from text.
         #Replace repeated character sequences of length 3 or greater with sequences of length 3.
@@ -99,7 +101,7 @@ class SentenceDataset(Dataset):
         
         example = [0]*len(self.data[index])
         label  = self.labels[index]
-        length = len(example)
+        length = len(self.data[index])
         for i in range(len(example)):
             if self.data[index][i] in self.word2idx:
             	example[i] = self.word2idx[self.data[index][i]]
@@ -108,5 +110,5 @@ class SentenceDataset(Dataset):
         diff = len(self.data[index]) - self.max_length
         if (diff<0):
             example += [0 for j in range(abs(diff))]
-        return (example, label ,length)
+        return (numpy.array(example), label ,length)
 

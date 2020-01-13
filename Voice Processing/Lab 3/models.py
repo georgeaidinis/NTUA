@@ -45,8 +45,8 @@ class BaselineDNN(nn.Module):
         self.embedding.weight = nn.Parameter(torch.from_numpy(embeddings), requires_grad=trainable_emb)  # EX4
 
         # 4 - define a non-linear transformation of the representations
-        self.non_linearity1 = nn.ReLU()
-        self.non_linearity2 = nn.Tanh()  # EX5
+        self.non_linear_transformation1 = nn.ReLU()  # EX5
+        self.non_linear_transformation2 = nn.Tanh()
 
         # 5 - define the final Linear layer which maps
         # the representations to the classes
@@ -62,15 +62,26 @@ class BaselineDNN(nn.Module):
         """
 
         # 1 - embed the words, using the embedding layer
-        embeddings = self.embedding  # EX6
+        embeddings = self.embedding(x)  # EX6
 
         # 2 - construct a sentence representation out of the word embeddings
-        representations = self.mean_pooling(embeddings, lengths)  # EX6
+
+        #We are going to create a simple represantation, using the average
+        #(center of mass) of the word embeddings in a sentence
+
+
+        dimension_sums = torch.sum(embeddings, dim = 1)            #sum over columns   
+        l = lengths.view(-1, 1).expand(dimension_sums.size(0), dimension_sums.size(1))
+        representation =  dimension_sums / l.float() # EX6
+
+        
 
         # 3 - transform the representations to new ones.
-        representations = self.non_linearity1(representations)  # EX6
+
+
+        representations = self.non_linear_transformation1(representation)  # EX6
 
         # 4 - project the representations to classes using a linear layer
-        logits = self.classifier(representations)  # EX6
+        logits = self.classifier(representation)  # EX6
 
         return logits

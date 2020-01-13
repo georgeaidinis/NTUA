@@ -14,6 +14,8 @@ from utils.load_datasets import load_MR, load_Semeval2017A
 from utils.load_embeddings import load_word_vectors
 
 import numpy as np
+import matplotlib
+import math
 
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 
@@ -33,7 +35,7 @@ EMB_DIM = 50
 
 EMB_TRAINABLE = False
 BATCH_SIZE = 128
-EPOCHS = 50
+EPOCHS = 1000
 DATASET = "MR"  # options: "MR", "Semeval2017A"
 
 # if your computer has a CUDA compatible gpu use it, otherwise use the cpu
@@ -118,12 +120,8 @@ for i in range(5):
 
 
 # EX4 - Define our PyTorch-based DataLoader
-train_loader = ...  # EX7
-test_loader = ...  # EX7
-
-#############################################################################
-# Model Definition (Model, Loss Function, Optimizer)
-#############################################################################
+train_loader = DataLoader(dataset=train_set, batch_size=BATCH_SIZE, shuffle=True)  # EX7
+test_loader =  DataLoader(dataset=test_set, batch_size=BATCH_SIZE, shuffle=False)  # EX7
 
 
 
@@ -143,14 +141,38 @@ model = BaselineDNN(output_size=n_classes,  # EX8
 model.to(DEVICE)
 print(model)
 
+
+
+#############################################################################
+# Question 8
+#############################################################################
+#Model Definition (Model, Loss Function, Optimizer)
+
+
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("\n\n\nQUESTION 8 - Model Definition (Model, Loss Function, Optimizer):\n")
 # We optimize ONLY those parameters that are trainable (p.requires_grad==True)
-criterion = ...  # EX8
-parameters = ...  # EX8
-optimizer = ...  # EX8
+
+if n_classes==2:
+    criterion = torch.nn.BCEWithLogitsLoss()
+elif n_classes>2:
+    criterion = torch.nn.CrossEntropyLoss()  # EX8
+criterion = torch.nn.CrossEntropyLoss()
+parameters = [] # EX8
+for p in  model.parameters():
+    if(p.requires_grad):
+        parameters.append(p)
+optimizer = torch.optim.Adam(parameters, lr=0.0001, weight_decay=0.0001)  # EX8
+
+
+
 
 #############################################################################
 # Training Pipeline
 #############################################################################
+
+
+
 for epoch in range(1, EPOCHS + 1):
     # train the model for one epoch
     train_dataset(epoch, train_loader, model, criterion, optimizer)
@@ -160,6 +182,10 @@ for epoch in range(1, EPOCHS + 1):
                                                             model,
                                                             criterion)
 
+    print("train loss: ",train_loss)
+
+
     test_loss, (y_test_gold, y_test_pred) = eval_dataset(test_loader,
                                                          model,
                                                          criterion)
+    print("test loss: ",test_loss)
