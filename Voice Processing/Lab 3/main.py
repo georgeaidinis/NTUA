@@ -14,8 +14,15 @@ from utils.load_datasets import load_MR, load_Semeval2017A
 from utils.load_embeddings import load_word_vectors
 
 import numpy as np
-import matplotlib
+import matplotlib 
 import math
+from matplotlib import pyplot as plt
+
+
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import recall_score
+
 
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 
@@ -35,7 +42,7 @@ EMB_DIM = 50
 
 EMB_TRAINABLE = False
 BATCH_SIZE = 128
-EPOCHS = 1000
+EPOCHS = 100
 DATASET = "MR"  # options: "MR", "Semeval2017A"
 
 # if your computer has a CUDA compatible gpu use it, otherwise use the cpu
@@ -76,7 +83,7 @@ y_test = list(le.transform(y_test))  # EX1
 n_classes = le.classes_.size  # EX1 - LabelEncoder.classes_.size
 
 for i in range(10):
-    print(y_train[i])
+    print(y_train[i], "   ", y_train_original[i])
 
 
 #############################################################################
@@ -92,9 +99,9 @@ test_set = SentenceDataset(X_test, y_test, word2idx)
 
 for i in range(10):
     print("sentence no.",i+1,": ")
-    print(train_set.data[i])
+    print(" ".join(X_train[i]))
     print("\nthis is returned by the class as: \n")
-    print(train_set[i], "\n")
+    print(train_set.data[i], "\n")
 
 #############################################################################
 # Question 3
@@ -171,7 +178,12 @@ optimizer = torch.optim.Adam(parameters, lr=0.0001, weight_decay=0.0001)  # EX8
 # Training Pipeline
 #############################################################################
 
+training_losses = [0]*(EPOCHS)
+testing_losses = [0]*(EPOCHS)
 
+
+
+print("\n Model Training begins now. \n")
 
 for epoch in range(1, EPOCHS + 1):
     # train the model for one epoch
@@ -182,10 +194,43 @@ for epoch in range(1, EPOCHS + 1):
                                                             model,
                                                             criterion)
 
-    print("train loss: ",train_loss)
 
 
     test_loss, (y_test_gold, y_test_pred) = eval_dataset(test_loader,
                                                          model,
                                                          criterion)
-    print("test loss: ",test_loss)
+
+
+
+    training_losses[epoch-1] = train_loss
+    testing_losses[epoch-1] = test_loss
+    print("\nMetric analysis for the model in this Epoch: \n")
+
+    print('F1 metric for training: {}'.format(f1_score(y_train_gold, y_train_pred, average="macro")))
+    print('Accuracy for training: {}'.format(accuracy_score(y_train_gold, y_train_pred)))
+    print('Recall metric for training: {}'.format(recall_score(y_train_gold, y_train_pred, average="macro")))
+    print('F1 metric for testing: {}'.format(f1_score(y_test_gold, y_test_pred, average="macro")))
+    print('Accuracy for testing: {}'.format(accuracy_score(y_test_gold, y_test_pred)))
+    print('Recall metric for testing: {}\n'.format(recall_score(y_test_gold, y_test_pred, average="macro")))
+
+
+arr1 = np.array(training_losses)
+arr2 = np.array(testing_losses)
+
+fig = plt.figure()
+axes = plt.gca()
+if DATASET =='MR':
+    axes.set_ylim([0.5,0.9])
+elif DATASET == 'Semeval2017A':
+    axes.set_ylim([0.8,1.2])
+plt.plot(arr1,  label="train data")
+plt.plot(arr2,  label="test data")
+fig.suptitle('Loss for training and testing of the model', fontsize=20)
+plt.xlabel('Epoch number', fontsize=18)
+plt.ylabel('Loss', fontsize=16)
+plt.legend()
+if DATASET == 'MR':
+    plt.savefig('MR losses')
+elif DATASET == 'Semeval2017A':
+    plt.savefig('Semeval2017A losses')
+plt.show()
