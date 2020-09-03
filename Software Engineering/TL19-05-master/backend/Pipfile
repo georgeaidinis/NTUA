@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+flask-restplus = "*"
+pyjwt = "*"
+Werkzeug = "==0.16"
+sqlalchemy = "*"
+pyfiglet = "*"
+requests = "*"
+pyexcel = "*"
+
+[requires]
+python_version = "3.7"

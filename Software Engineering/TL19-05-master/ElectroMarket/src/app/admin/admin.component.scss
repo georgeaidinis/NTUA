@@ -1,0 +1,90 @@
+#sticky-sidebar{
+    padding: 3em;
+    padding-left:.5em;
+    padding-right:.5em;
+    background-color: white;
+    margin-left: 2em;
+    border-radius: 1em;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    margin-right: 5em;
+  }
+  #general-li {
+    font-weight: 800;
+  }
+
+  .activeItem {
+    color:#54a0ff;
+  }
+
+  li {
+    color:#4a5568;
+  }
+
+  li:hover{
+    color:#54a0ff;
+    cursor: pointer;
+  }
+
+  #filters {
+    padding: 3em;
+    border-radius: .8em;
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05) !important;
+    margin-left: 5em;
+  }
+  
+
+  app-admin{
+      margin: 0em;
+  }
+
+  // .container{
+  //     margin-left: 0em;
+  //     margin-right: 0em;
+  // }
+
+  h3 {
+    margin-bottom: 4px;
+    margin-top: 8px;
+  }
+
+  #inputPassword{
+    display: inline;
+  }
+
+  #role-button {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  #roles{
+    margin-top:2em;
+  }
+
+  #mail{
+    margin-top: 2em;
+  }
+
+  .saveButton {
+    margin-right: 0.3em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 2em;
+    background-color: #54a0ff;
+    color: white;
+    position: relative;
+    transition: .3s;
+    margin-bottom:.3em;
+    border: none;
+}
+
+.background_wrapper {
+  background-image: url('../../assets/images/abstract-art-blur-bright-373543.jpg');
+  height: 100vh;
+  background-repeat: repeat-y;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}

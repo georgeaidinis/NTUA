@@ -1,0 +1,76 @@
+<div class="background_wrapper col-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <div class="text-danger font-weight-bold text-center" *ngIf="wrongCredentials">
+              <p>Incorrect Credentials</p>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="callLoginUser(loginForm.value)" class="form-signin">
+              <div class="form-label-group">
+                <input type="text" id="inputUid" class="form-control" placeholder="Username" formControlName="username" autocomplete="off">
+                <div class="d-flex justify-content-center" *ngIf="!loginForm.controls['username'].valid  && loginForm.controls['username'].touched">
+                  <p class="warning text-uppercase noselect">Your NSN id is required</p>
+                </div>
+                <label class="noselect" for="inputUid">Username</label>
+              </div>
+  
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" formControlName="password" autocomplete="off">
+                <div class="d-flex justify-content-center" *ngIf="!loginForm.controls['password'].valid  && loginForm.controls['password'].touched">
+                 <p class="warning text-uppercase noselect">Your NSN password is required</p>
+                </div>
+                <label class="noselect" for="inputPassword">Password</label>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button [disabled]="!loginForm.valid" class="btn btn-lg btn-primary text-uppercase" type="submit" *ngIf="!loading">Sign in</button>
+                <button class="btn btn-lg btn-primary" type="button" disabled *ngIf="loading">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" id="modalButton" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SOPHIA Tool Disclaimer</h5>
+      </div>
+      <div class="modal-body">
+        <h6>Welcome to SOPHIA Tool!</h6>
+        <p>SOPHIA Tool is a company-wide skills management system for internal use, enabling registration of own public skills and visibility over the public skills of the employees that allow this action, via a well-defined permission system.</p>
+        <p>The use of the SOPHIA Tool is voluntary for employees and refraining from it will cause no detrimental or disciplinary consequences.</p>
+        <p>Personal information, and notably skills are controlled by the employee himself/herself. The employee can register ONLY the public skills he/she wants so. Employees can choose anytime to remove their skills’ information from the Tool.</p>
+        <p>No secret or confidential content are stored in the SOPHIA Tool in any format (documents, discussions, private messages, etc.).</p>
+        <p>Users must adhere to Nokia policies, including Nokia’s Information Security Policy, National Security Agreement Policies, and the Nokia Code of Conduct in their use of the SOPHIA Tool. Violation of Nokia Policies or the Nokia Code of Conduct or associated procedures may be regarded as a reason for disciplinary actions up to termination of employment.</p>
+        <u>Permissions :</u>
+        <ul>
+          <li>The solid line manager can see the public skills of own employees.</li>
+          <li>Each employee can see the statistics of own-location employees down to team level, without names.</li>
+          <li>Authorized Tool administrators have access to the public skills of all employees.</li>
+        </ul>
+        <p>By accepting the SOPHIA Tool Disclaimer, you confirm that you have understood given conditions and that you commit to respect them as well as to use SOPHIA Tool with professional manner reflected in our company values and with respect to each individual.</p>
+        <p>By entering SOPHIA Tool, you accept the Disclaimer.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="allowUserIn()" data-dismiss="modal">Accept</button>
+        <button type="button" class="btn btn-primary" (click)="termsDeclined()" data-dismiss="modal">Decline</button>
+      </div>
+    </div>
+  </div>
+</div>

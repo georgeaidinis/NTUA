@@ -1,0 +1,144 @@
+<div class="background_wrapper">
+    <div id="filters" class="container col-11">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2 class="Logo">
+                    ElectroMarket
+                </h2>
+                <div *ngIf="role==1" class="row">
+                    <button routerLink="/admin" (click)="displayUserMenu=false" id="admin"
+                        class="userMenuButton col align-self-center">Admin Pages</button>
+                </div>
+
+            </div>
+            <div>
+                <h2 class="user-tag">
+                    {{username}}
+                </h2>
+                <h4 id="logout" (click)="logout()">
+                    Log out
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div id="app" class="container col-11">
+        <div class="d-flex justify-content-between">
+            <h4>Επιλογή συνόλου αγοράς ηλεκτρικής ενέργειας:</h4>
+            <div *ngIf="canPerformSearch()" class="col-1 d-flex justify-content-end">
+                <div (click)="search()" class="search-btn">Search</div>
+            </div>
+        </div>
+        <div class="row" id="DatasetSelection">
+            <div class="col-1"></div>
+            <ng-container *ngFor="let option of ListOfDatasets; let j = index;">
+                <div class="col-2">
+                    <div class="checkbox">
+                        <input id="selectOption{{j}}" type="checkbox" name="selectOption{{j}}"
+                            (click)="dataset=mapper[option]; getAreas()"
+                            [ngClass]="{activeCheckBox: dataset === mapper[option]}" value="{{option}}">
+                        <label for="selectOption{{j}}">{{option}}</label>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="row" id="Area_Res">
+            <div class="col-2">
+                <h4>Επιλογή ζώνης αγοράς:</h4>
+            </div>
+            <div class="col-2 justify-content-center">
+                <ng2-completer id="text-input" [datasource]="ListOfAreas['Areas']" [minSearchLength]="1"
+                    [(ngModel)]="AreaName" name="Area" placeholder="Επιλέξτε περιοχή ..."></ng2-completer>
+            </div>
+
+            <div class="col-2">
+                <h4>Κωδικός Χρονικής Ανάλυσης<span style="color: red">*</span></h4>
+            </div>
+            <div class="col-2 justify-content-center">
+                <select class="custom-select" id="text-input">
+                    <option disabled selected>Choose...</option>
+                    <option value="'AllTypes'" (click)="Resolution='AllTypes'">All Types</option>
+                    <ng-container *ngFor="let code of ListOfResCodes['Resolution Codes']; let i = index">
+                        <option value={{code}} (click)="Resolution=code">{{code}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div *ngIf="dataset === 'AggregatedGenerationPerType'" class="col-2">
+                <h4>Τύπος Παραγωγής Ενέργειας:<span style="color: red">*</span></h4>
+            </div>
+            <div *ngIf="dataset === 'AggregatedGenerationPerType'" class="col-2">
+                <ng2-completer id="text-input" [datasource]="ListOfTypes['Production Types']" [minSearchLength]="1"
+                    [(ngModel)]="ProductionType" name="Type" placeholder="Επιλέξτε τύπο παραγωγής ..."></ng2-completer>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="DatePicker">
+                <h4>Αναζήτηση ανά:<span style="color: red">*</span></h4>
+                <p [ngClass]="{'date-selected': DateType === 'date', 'date': DateType !== 'date'}"
+                    (click)="DateType = 'date'">Ημερομηνία</p>
+                <p [ngClass]="{'date-selected': DateType === 'month', 'date': DateType !== 'month'}"
+                    (click)="DateType = 'month'">Μήνα</p>
+                <p [ngClass]="{'date-selected': DateType === 'year', 'date': DateType !== 'year'}"
+                    (click)="DateType = 'year'">Χρόνο</p>
+            </div>
+            <div class="col-1" id="DatePickerForm">
+                <h4>Χρόνος<span style="color: red">*</span></h4>
+            </div>
+            <div class="col-2 justify-content-center" id="DatePickerForm">
+                <select class="custom-select" id="text-input">
+                    <option disabled selected>Choose...</option>
+                    <ng-container *ngFor="let year of ListOfYears; let i = index">
+                        <option value={{year}} (click)="Year=year">{{year}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div *ngIf="DateType !== 'year'" class="col-1" id="DatePickerForm">
+                <h4>Μήνας<span style="color: red">*</span></h4>
+            </div>
+            <div *ngIf="DateType !== 'year'" class="col-2 justify-content-center" id="DatePickerForm">
+                <select class="custom-select" id="text-input">
+                    <option disabled selected>Choose...</option>
+                    <ng-container *ngFor="let month of ListOfMonths; let i = index">
+                        <option value={{month}} (click)="Month=month">{{month}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div *ngIf="DateType === 'date'" class="col-1" id="DatePickerForm">
+                <h4>Μέρα<span style="color: red">*</span></h4>
+            </div>
+            <div *ngIf="DateType === 'date'" class="col-2 justify-content-center" id="DatePickerForm">
+                <select class="custom-select" id="text-input">
+                    <option disabled selected>Choose...</option>
+                    <ng-container *ngFor="let day of ListOfDays; let i = index">
+                        <option value={{day}} (click)="Day=day">{{day}}</option>
+                    </ng-container>
+                </select>
+            </div>
+
+        </div>
+        <ng-container *ngIf="Records != {}">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <ng-container *ngFor="let record of Records['records']; let i = index">
+                            <ng-container *ngFor="let attribute of record | keyvalue">
+                                <th *ngIf="i == 0 && attribute.key != 'Source'" scope="col">{{attribute.key}}</th>
+                            </ng-container>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let record of Records['records']; let i = index">
+                        <tr>
+                            <ng-container *ngFor="let attribute of record | keyvalue">
+                                <td *ngIf="attribute.key != 'Source'">
+                                    {{attribute.value}}
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+
+    </div>
+</div>

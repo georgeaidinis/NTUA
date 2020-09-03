@@ -1,0 +1,158 @@
+<div class="background_wrapper">
+    <div class="container col-8">
+        <div class="row ">
+
+            <div class="col-3">
+                <div class="sticky-top">
+                    <div class="container disable-select col-12" id="sticky-sidebar">
+                        <ng-container *ngFor="let action of AdminActions | keyvalue:noSort">
+                            <ul id="general-options">
+                                <li [ngClass]="{activeItem: action.key == activeCard}" id="general-li"
+                                    (click)="setCurrentCard(action.key)">{{action.key}}</li>
+                            </ul>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9" id="main">
+                <ng-container *ngIf="activeCard == 'Εισαγωγή νέου χρήστη'; then AddUser"></ng-container>
+                <ng-container *ngIf="activeCard == 'Προβολή στοιχείων υπάρχοντος χρήστη';then ShowUser"></ng-container>
+                <ng-container *ngIf="activeCard == 'Εισαγωγή αρχείου csv';then ImportCSV"></ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #AddUser>
+    <div id="filters" class="container col-11">
+        <div class="row">
+            <div class="col-10 mb-5">
+                <h3 id="card-title">Εισαγωγή νέου χρήστη</h3>
+            </div>
+            <div class="col-1 mb-5">
+                <button class="saveButton" [disabled]="disableSaveButton()" (click)="saveNewUser()">Save
+                </button>
+            </div>
+            <!-- <div *ngIf="saved === true" class="col-1 mb-5">
+                <div class="saved" id="SaveButton">Saved</div>
+            </div> -->
+        </div>
+        <form>
+            <div class="row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Όνομα Χρήστη</label>
+                <input class="form-control" type="text" [(ngModel)]="UserInfo['username']"
+                    [ngModelOptions]="{standalone: true}" placeholder="Όνομα Χρήστη">
+            </div>
+            <div class="row" id="mail">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Διεύθυνση email</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        [(ngModel)]="UserInfo['email']" [ngModelOptions]="{standalone: true}"
+                        placeholder="name@example.com">
+                </div>
+            </div>
+            <div class="row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Κωδικός Χρήστη</label>
+                <input type="password" class="form-control" id="inputPassword" [(ngModel)]="UserInfo['password']"
+                    [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="row" id="roles">
+                <label>Ρόλος Χρήστη:</label>
+                <div class="form-check form-check-inline" id="role-button">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                        value="option1">
+                    <label class="form-check-label" for="inlineRadio1" (click)="UserInfo['role']=0">Απλός
+                        Χρήστης</label>
+                </div>
+                <div class="form-check form-check-inline" id="role-button">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                        value="option2">
+                    <label class="form-check-label" for="inlineRadio2" (click)="UserInfo['role']=1">Διαχειριστής</label>
+                </div>
+                <div>
+                    <label for="quota">Ημερήσια Quota</label>
+                    <input type="text" class="form-control" id="quota" [(ngModel)]="UserInfo['daily_quotas']"
+                        [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+<ng-template #ShowUser>
+    <div id="filters" class="container col-11">
+        <div class="row">
+            <div class="col-10 mb-5">
+                <h3 id="card-title">Προβολή στοιχείων χρήστη</h3>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <label>Επιλογή Χρήστη</label>
+                <div class="col-2 justify-content-center">
+                    <select class="custom-select" id="text-input">
+                        <option disabled selected>Επιλέξτε χρήστη...</option>
+                        <ng-container *ngFor="let user of Usernames['Usernames']; let i = index">
+                            <option value={{user}} (click)="selectedUser=user; getUserInfo()">{{user}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+            </div>
+            <ng-container *ngIf="showingUser() == true">
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-dark" (click)="editing = true">Επεξεργασία</button>
+                    <button type="button" class="btn btn-primary" (click)="editing = false; saveChanges()">Αποθήκευση Αλλαγών</button>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Όνομα Χρήστη:</label>
+                    <h3 *ngIf="!editing">{{UserShown['username']}}</h3>
+                    <label *ngIf="editing" for="disabledTextInput">{{UserShown['username']}}</label>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Email Χρήστη:</label>
+                    <h3 *ngIf="!editing">{{UserShown['mail']}}</h3>
+                    <div *ngIf="editing" class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                            [(ngModel)]="UserInfo['email']" [ngModelOptions]="{standalone: true}"
+                            placeholder="{{UserShown['email']}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Κωδικός χρήστη:</label>
+                    <h3 *ngIf="!editing">{{UserShown['current_quotas']}}</h3>
+                    <input *ngIf="editing" class="form-control" type="text" [(ngModel)]="UserInfo['password']"
+                        placeholder="{{UserShown['password']}}">
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Ρόλος Χρήστη:</label>
+                    <h3 *ngIf="!editing">{{UserShown['role']}}</h3>
+                    <label *ngIf="editing" for="disabledTextInput">{{UserShown['username']}}</label>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Ημερήσια Quota:</label>
+                    <h3 *ngIf="!editing">{{UserShown['daily_quotas']}}</h3>
+                    <input *ngIf="editing" class="form-control" type="text" [(ngModel)]="UserInfo['quota']"
+                        placeholder="{{UserShown['daily_quotas']}}">
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #ImportCSV>
+    <div id="filters" class="container col-11">
+        <div class="row">
+            <div class="col-10 mb-5">
+                <h3 id="card-title">Εισαγωγή αρχείου CSV</h3>
+            </div>
+        </div>
+        <form>
+            <div class="form-group">
+                <!-- <label for="exampleFormControlFile1">Εισαγωγή CSV αρχείου</label> -->
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+        </form>
+    </div>
+</ng-template>
