@@ -11,9 +11,10 @@
     <string name="login_failed">"Login failed"</string>
     <!-- Strings related to signup -->
     <string name="signup_name">Register through email</string>
+    <string name="create_acc_message">Create your account, so that you can use the app!</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_retype_password">Retype Password</string>
-    <string name="action_sign_up">Register</string>
+    <string name="action_sign_up">Create Account</string>
     <string name="password_mismatch">Passwords do not match</string>
     <string name="empty_name">Name is blank</string>
     <string name="signup_failed">Registration failed</string>
