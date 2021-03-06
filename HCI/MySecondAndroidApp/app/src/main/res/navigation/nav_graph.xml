@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/SplashFragment">
+
+    <fragment
+        android:id="@+id/SplashFragment"
+        android:name="ntua.hci.mysecondandroidapp.ui.login.SplashFragment"
+        tools:layout="@layout/activity_splash">
+
+        <action android:id="@+id/splash_to_connect"
+            app:destination="@id/ConnectFragment" />
+
+        <action android:id="@+id/splash_to_signup"
+            app:destination="@id/SignupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ConnectFragment"
+        android:name="ntua.hci.mysecondandroidapp.ui.login.ConnectFragment"
+        tools:layout="@layout/activity_connect">
+
+        <action
+            android:id="@+id/connect_to_splash"
+            app:destination="@id/SplashFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SignupFragment"
+        android:name="ntua.hci.mysecondandroidapp.ui.login.SignupFragment"
+        tools:layout="@layout/activity_signup">
+
+        <action
+            android:id="@+id/connect_to_splash"
+            app:destination="@id/SplashFragment" />
+    </fragment>
+</navigation>

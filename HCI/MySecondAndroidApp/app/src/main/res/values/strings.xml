@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">PetBnB</string>
+    <!-- Strings related to login -->
+    <string name="login_name">Connect through Email</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Connect</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Email address is not valid</string>
+    <string name="invalid_password">The password must be more than 5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- Strings related to signup -->
+    <string name="signup_name">Register through email</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_retype_password">Retype Password</string>
+    <string name="action_sign_up">Register</string>
+    <string name="password_mismatch">Passwords do not match</string>
+    <string name="empty_name">Name is blank</string>
+    <string name="signup_failed">Registration failed</string>
+    <string name="email_sent">Sending confirmation email to </string>
+    <string name="email_failed">"Failed to send confirmation email!"</string>
+    <string name="verify_email">"Please confirm your email!"</string>
+    <!-- Strings related to splash -->
+    <string name="imgContentDesc">Image logo</string>
+    <string name="first_message">You have to login to continue</string>
+    <string name="connectFacebook">Connect through Facebook</string>
+    <string name="connectGoogle">Connect through Google</string>
+    <string name="connectEmail">Connect through Email</string>
+    <string name="signupEmail"><u>Create Account</u></string>
+    <!-- Strings related to main -->
+    <string name="txtName">Welcome </string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="OwnerButton">Pet Owner</string>
+    <string name="SitterButton">Pet Sitter</string>
+    <string name="TerminateButton">Logout</string>
+    <string name="textChoice">Continue as...</string>
+    <string name="todo">TODO</string>
+
+
+</resources>
